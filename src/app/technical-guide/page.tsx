@@ -1,9 +1,17 @@
+'use client';
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Palette, Zap, Puzzle, BrainCircuit, Database, Server, FileCode } from "lucide-react";
+import { Palette, Zap, Puzzle, BrainCircuit, Database, Server, FileCode, Copy, Check } from "lucide-react";
 import GridBackground from "@/components/illustrations/grid-background";
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 export default function TechnicalGuidePage() {
+  const { toast } = useToast();
+  const [isCopied, setIsCopied] = useState(false);
+
   const prompt = `You are an AI-powered lead assessment tool. Analyze the following lead information and provide a lead score, rationale, and next steps.
 
 Company Name: {{{companyName}}}
@@ -12,6 +20,14 @@ Company Size: {{{companySize}}}
 Lead Description: {{{leadDescription}}}
 
 Consider factors like the company's industry, size, and the lead description to determine the potential value of the lead.  Provide a lead score between 0 and 100.`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      setIsCopied(true);
+      toast({ title: "Copied!", description: "Prompt copied to clipboard." });
+      setTimeout(() => setIsCopied(false), 2000);
+    });
+  };
 
   return (
     <div className="relative overflow-hidden animate-fade-in">
@@ -115,9 +131,20 @@ Consider factors like the company's industry, size, and the lead description to 
                   <AccordionTrigger className="text-lg font-headline flex items-center gap-2"><FileCode className="w-5 h-5"/> View System Prompt</AccordionTrigger>
                   <AccordionContent>
                     <p className="mb-2">This is the core instruction given to the AI, defining its role and the expected output format.</p>
-                    <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                      <code className="font-code">{prompt}</code>
-                    </pre>
+                    <div className="relative">
+                      <pre className="bg-muted p-4 pr-12 rounded-md text-sm overflow-x-auto">
+                        <code className="font-code">{prompt}</code>
+                      </pre>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-2 right-2 h-7 w-7 text-muted-foreground hover:bg-muted-foreground/10 hover:text-foreground"
+                        onClick={handleCopy}
+                        aria-label="Copy prompt"
+                      >
+                        {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                      </Button>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
