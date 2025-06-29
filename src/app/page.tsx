@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Rocket, Building, Globe } from 'lucide-react';
+import { ArrowRight, Rocket, Building, Globe, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import HeroAnimation from '@/components/illustrations/hero-animation';
@@ -11,7 +11,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="container mx-auto">
         <div className="grid min-h-[calc(100vh-3.5rem)] items-center gap-8 px-4 py-16 md:grid-cols-2 md:py-24">
-          <div className="relative flex items-center justify-center animate-in fade-in zoom-in-95 duration-700 md:order-1">
+          <div className="relative flex items-center justify-center animate-in fade-in zoom-in-95 duration-700">
             <HeroFloatingIcons />
             <HeroAnimation className="h-auto w-full max-w-lg" />
           </div>
@@ -94,6 +94,24 @@ export default function Home() {
              <p className="mt-4 text-lg text-muted-foreground max-w-4xl mx-auto">
               While we are a global agency, we have a deep understanding of the Somali market, including its mobile-first nature and the significant economic and cultural role of the global diaspora. We are uniquely positioned to help brands connect with this dynamic and growing audience.
              </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <Sparkles className="h-12 w-12 text-primary mx-auto mb-4 animate-pulse" />
+          <h2 className="font-headline text-3xl font-bold uppercase tracking-tight">Ready to Build Your Digital Future?</h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+            Let's discuss how our expertise can help you achieve your goals. Schedule a free, no-obligation consultation with our team today.
+          </p>
+          <div className="mt-8">
+            <Button asChild size="lg" variant="destructive">
+              <Link href="/lead-assessment">
+                Schedule a Consultation
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
