@@ -1,18 +1,23 @@
 'use client';
 
-import Footer from '@/components/footer';
+import { usePathname } from "next/navigation";
 import Header from '@/components/header';
+import Footer from '@/components/footer';
 
-export default function LayoutWrapper({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <>
-      <Header />
-      <main className="flex-grow">{children}</main>
-      <Footer />
-    </>
-  );
+export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+    const isAdminPage = pathname.startsWith('/admin');
+
+    if (isAdminPage) {
+        // AdminLayout provides its own <main> via SidebarInset
+        return <>{children}</>;
+    }
+
+    return (
+        <>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+        </>
+    )
 }
