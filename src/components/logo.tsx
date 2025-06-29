@@ -16,12 +16,11 @@ type LogoProps = {
 export default function Logo({ className, onClick, asImage = false, width = 120, height = 40, ...props }: LogoProps) {
   const content = asImage ? (
     <Image
-        src={`https://placehold.co/${width}x${height}.png`}
+        src="/Image/log.png"
         alt="Saxaaf Network Logo"
         width={width}
         height={height}
         priority
-        data-ai-hint="logo"
       />
   ) : (
     <span className="font-headline text-2xl font-bold uppercase tracking-wider text-foreground">
