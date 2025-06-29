@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 
@@ -14,8 +15,7 @@ type LogoProps = {
 
 export default function Logo({ className, onClick, asImage = false, width = 120, height = 40, ...props }: LogoProps) {
   const content = asImage ? (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
         src="/image/log.png"
         alt="Saxaaf Network Logo"
         width={width}
