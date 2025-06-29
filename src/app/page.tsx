@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, BrainCircuit, CodeXml, Film } from 'lucide-react';
 import HeroAnimation from '@/components/illustrations/hero-animation';
+import Logo from '@/components/logo';
 
 const services = [
   {
@@ -30,12 +31,12 @@ export default function Home() {
         <div className="container px-4 z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="text-center md:text-left animate-in fade-in slide-in-from-left duration-700">
-              <h1 className="text-4xl font-extrabold tracking-tight uppercase sm:text-5xl md:text-6xl font-headline">
-                Saxaaf Network
-              </h1>
-              <p className="mt-4 text-2xl font-semibold text-primary sm:text-3xl">
+              <div className="mb-4">
+                <Logo className="h-16 w-auto mx-auto md:mx-0" />
+              </div>
+              <h1 className="mt-4 text-2xl font-semibold text-primary sm:text-3xl font-headline uppercase">
                 WHERE CREATIVE VISION MEETS INTELLIGENT TECHNOLOGY
-              </p>
+              </h1>
               <p className="mt-6 text-lg text-foreground/80 max-w-xl mx-auto md:mx-0">
                 We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
               </p>
