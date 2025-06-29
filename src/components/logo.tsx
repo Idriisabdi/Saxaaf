@@ -14,12 +14,11 @@ type LogoProps = {
 export default function Logo({ className, onClick, width = 160, height = 40, ...props }: LogoProps) {
   const content = (
     <Image
-      src="/image/log.png"
+      src="/image/logo.png"
       alt="Saxaaf Network Logo"
       width={width}
       height={height}
       className="object-contain"
-      unoptimized
     />
   );
 
