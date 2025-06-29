@@ -1,18 +1,18 @@
 'use client';
 
-import { Film, CodeXml, BrainCircuit, Sparkles, ArrowRight } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import { Camera, Computer } from 'lucide-react';
+import React from 'react';
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes } from 'react';
 
 
 const icons = [
-  { Icon: Film, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 120 },
-  { Icon: CodeXml, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 135 },
-  { Icon: BrainCircuit, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 150 },
-  { Icon: Film, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 105 },
-  { Icon: CodeXml, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 90 },
-  { Icon: BrainCircuit, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 125 },
+  { Icon: Camera, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 160 },
+  { Icon: Computer, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 175 },
+  { Icon: Camera, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 190 },
+  { Icon: Computer, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 145 },
+  { Icon: Camera, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 130 },
+  { Icon: Computer, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 165 },
 ];
 
 const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
