@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="text-center animate-in fade-in zoom-in-95 duration-500">
           <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl uppercase flex items-center justify-center gap-4">
             <Sparkles className="h-10 w-10 text-primary animate-pulse" />
-            About Saxaaf Network
+            About US
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-foreground/80">
             Fusing creative vision with intelligent technology to build the future of digital engagement.
