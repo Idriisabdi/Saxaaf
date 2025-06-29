@@ -43,10 +43,13 @@ export default function AdminChatPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth();
 
     useEffect(() => {
-        if (!user) return; // Wait for user to be authenticated
+        if (authLoading || !user) {
+            // Wait for authentication to resolve. The AdminLayout will handle redirection if needed.
+            return;
+        }
 
         const q = query(collection(db, 'chats'), orderBy('lastMessageAt', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -61,7 +64,7 @@ export default function AdminChatPage() {
             setIsPageLoading(false);
         });
         return () => unsubscribe();
-    }, [user]);
+    }, [user, authLoading]);
 
     useEffect(() => {
         if (!selectedChat) return;
