@@ -1,71 +1,43 @@
 import Link from 'next/link';
-import { NAV_LINKS } from '@/lib/constants';
-import Logo from './logo';
-import { Github, Twitter, Linkedin } from 'lucide-react';
+import { Twitter, Linkedin, Facebook } from 'lucide-react';
+import Logo from '@/components/logo';
 
 export default function Footer() {
   return (
-    <footer className="bg-card border-t">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-4">
-            <Logo />
-            <p className="text-muted-foreground text-sm">
-              Driving Growth, Building Futures.
-            </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Github className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Linkedin className="h-5 w-5" />
-              </Link>
-            </div>
+    <footer className="bg-secondary text-secondary-foreground">
+      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
+          <div className="flex flex-col items-center md:items-start">
+            <Link href="/" className="flex items-center">
+              <Logo className="h-10 w-auto" />
+            </Link>
           </div>
-          <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-8">
-            <div>
-              <h3 className="font-headline font-semibold">Navigation</h3>
-              <ul className="mt-4 space-y-2">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-headline font-semibold">Legal</h3>
-              <ul className="mt-4 space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          <div className="flex space-x-4">
+            <Link href="#" className="group" aria-label="Twitter">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-foreground/10 text-secondary-foreground/80 transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                <Twitter className="h-5 w-5" />
+              </div>
+              <span className="sr-only">Twitter</span>
+            </Link>
+            <Link href="#" className="group" aria-label="LinkedIn">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-foreground/10 text-secondary-foreground/80 transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                <Linkedin className="h-5 w-5" />
+              </div>
+              <span className="sr-only">LinkedIn</span>
+            </Link>
+            <Link href="#" className="group" aria-label="Facebook">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-foreground/10 text-secondary-foreground/80 transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                <Facebook className="h-5 w-5" />
+              </div>
+              <span className="sr-only">Facebook</span>
+            </Link>
           </div>
         </div>
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} PillarClone. All rights reserved.</p>
+        <div className="mt-8 flex flex-col items-center gap-4 border-t border-secondary-foreground/20 pt-6 text-sm text-secondary-foreground/60 sm:flex-row sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} Saxaaf Network. All rights reserved.</p>
+          <Link href="/lead-assessment" className="transition-colors hover:text-primary">
+            Admin Panel
+          </Link>
         </div>
       </div>
     </footer>
