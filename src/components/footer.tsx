@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Twitter, Linkedin, Facebook } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Logo from '@/components/logo';
 
 export default function Footer() {
   const [year, setYear] = useState<number | null>(null);
@@ -16,9 +17,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
           <div className="flex flex-col items-center md:items-start">
-            <Link href="/" className="font-headline text-2xl font-bold uppercase">
-              Saxaaf Network
-            </Link>
+            <Logo width={180} />
           </div>
           <div className="flex space-x-4">
             <Link href="#" className="group" aria-label="Twitter">
