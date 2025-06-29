@@ -7,6 +7,8 @@ import {
   orderBy,
   serverTimestamp,
   type Timestamp,
+  where,
+  limit,
 } from 'firebase/firestore';
 import type { AssessLeadInput, AssessLeadOutput } from '@/ai/flows/assess-lead';
 
@@ -64,6 +66,22 @@ export async function addLead(
   }
   
   const leadsCollection = collection(db, 'leads');
+  
+  // Check for recent submissions from the same company to prevent duplicates.
+  const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+  const duplicateCheckQuery = query(
+    leadsCollection,
+    where('companyName', '==', sanitize(input.companyName)),
+    where('date', '>=', fiveMinutesAgo),
+    limit(1)
+  );
+
+  const querySnapshot = await getDocs(duplicateCheckQuery);
+  if (!querySnapshot.empty) {
+    // A recent lead from the same company exists.
+    throw new Error("A submission from this company was received very recently. Please wait a few minutes before trying again.");
+  }
+
   const docRef = await addDoc(leadsCollection, {
     // Input data from the form (sanitized)
     type: 'Consultation',
