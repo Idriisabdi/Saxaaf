@@ -1,8 +1,16 @@
 'use client';
 
-import { type SVGProps } from 'react';
+import { useState, useEffect, type SVGProps } from 'react';
 
 const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
+  const [particleRadii, setParticleRadii] = useState<number[]>([]);
+
+  useEffect(() => {
+    // This code runs only on the client, after the component has mounted.
+    const radii = Array.from({ length: 25 }, () => 1 + Math.random() * 2);
+    setParticleRadii(radii);
+  }, []); // Empty dependency array ensures this runs only once.
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -112,8 +120,8 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
       <g>
         <path className="creative-stream-path" d="M 400,300 C 200,100 250,500 50,300" fill="none" stroke="url(#creative-stream-gradient)" strokeWidth="40" filter="url(#glow-filter)"/>
         {/* Creative Particles */}
-        {Array.from({ length: 25 }).map((_, i) => (
-           <circle key={'p-' + i} className="creative-particle" r={1 + Math.random() * 2} fill="hsl(var(--secondary))" style={{ animationDelay: `${i * 0.15}s` }}>
+        {particleRadii.length > 0 && particleRadii.map((radius, i) => (
+           <circle key={'p-' + i} className="creative-particle" r={radius} fill="hsl(var(--secondary))" style={{ animationDelay: `${i * 0.15}s` }}>
              <animateMotion dur="10s" repeatCount="indefinite" path="M 400,300 C 200,100 250,500 50,300" />
            </circle>
         ))}
