@@ -35,27 +35,32 @@ export async function sendMessage(chatId: string, message: z.infer<typeof Messag
 }
 
 // Action to create a new chat session
-export async function createChat(userName: string, firstMessage: string) {
+export async function createChat(userName: string, email: string, firstMessage?: string) {
     const sanitizedUserName = sanitize(userName);
-    const sanitizedFirstMessage = sanitize(firstMessage);
+    const sanitizedEmail = sanitize(email);
 
     const chatsCol = collection(db, 'chats');
     const newChatRef = doc(chatsCol); // Create a new doc with a generated ID
     
+    const lastMessage = firstMessage ? sanitize(firstMessage) : 'New chat session started.';
+
     await setDoc(newChatRef, {
         userName: sanitizedUserName,
+        email: sanitizedEmail,
         createdAt: serverTimestamp(),
-        lastMessage: sanitizedFirstMessage,
+        lastMessage: lastMessage,
         lastMessageAt: serverTimestamp(),
         isReadByAdmin: false,
     });
 
-    const messagesCol = collection(newChatRef, 'messages');
-    await addDoc(messagesCol, {
-        text: sanitizedFirstMessage,
-        sender: 'user',
-        timestamp: serverTimestamp(),
-    });
+    if (firstMessage) {
+        const messagesCol = collection(newChatRef, 'messages');
+        await addDoc(messagesCol, {
+            text: sanitize(firstMessage),
+            sender: 'user',
+            timestamp: serverTimestamp(),
+        });
+    }
 
     return newChatRef.id;
 }

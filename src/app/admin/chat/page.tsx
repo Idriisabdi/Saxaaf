@@ -15,6 +15,7 @@ import { Send, Loader2 } from 'lucide-react';
 interface ChatSession {
     id: string;
     userName: string;
+    email?: string;
     lastMessage: string;
     lastMessageAt: Timestamp | null;
     isReadByAdmin: boolean;
@@ -127,6 +128,7 @@ export default function AdminChatPage() {
                     <>
                         <div className="p-4 border-b">
                             <h2 className="text-xl font-bold">{selectedChat.userName}</h2>
+                            {selectedChat.email && <p className="text-sm text-muted-foreground">{selectedChat.email}</p>}
                         </div>
                         <div className="flex-1 p-4 overflow-y-auto bg-card/20">
                             <div className="space-y-4">
