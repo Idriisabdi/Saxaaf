@@ -1,6 +1,8 @@
 'use server';
 
 import { z } from 'zod';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required.").max(50),
@@ -18,12 +20,15 @@ export async function submitContactFormAction(data: FormValues) {
     return { success: false, message: "Invalid form data." };
   }
 
-  // In a real application, you would handle the form submission here,
-  // e.g., send an email, save to a database, etc.
-  console.log("Form submitted successfully:", parsedData.data);
-  
-  // Simulate a successful submission
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  return { success: true, message: "Your message has been sent!" };
+  try {
+    await addDoc(collection(db, "contacts"), {
+      ...parsedData.data,
+      submittedAt: serverTimestamp(),
+    });
+    
+    return { success: true, message: "Your message has been sent!" };
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    return { success: false, message: "An unexpected error occurred while sending your message. Please try again later." };
+  }
 }
