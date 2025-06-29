@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { DollarSign, Users, LineChart, AlertTriangle, Loader2 } from 'lucide-react';
+import { Users, AlertTriangle, Loader2 } from 'lucide-react';
 import { getLeads, type Lead } from '@/services/lead-service';
 import { format } from 'date-fns';
 
@@ -64,8 +64,6 @@ export default function AdminDashboardPage() {
       value: highPriorityLeads.toString(),
       icon: AlertTriangle,
     },
-    { title: 'Conversion Rate', value: '12.5%', icon: LineChart },
-    { title: 'Total Revenue', value: '$125,432', icon: DollarSign },
   ];
 
   if (isLoading) {
@@ -80,7 +78,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2">
         {stats.map((stat) => (
           <Card key={stat.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
