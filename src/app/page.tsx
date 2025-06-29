@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import * as React from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
@@ -35,14 +35,9 @@ export default function Home() {
         <HeroAnimation className="absolute inset-0 w-full h-full object-cover opacity-20" />
         <div className="container px-4 z-10 text-center">
             <div className="max-w-4xl mx-auto animate-in fade-in zoom-in-95 duration-700">
-                <Image
-                  src="/image/log.png"
-                  alt="Saxaaf Network Logo"
-                  width={600}
-                  height={150}
-                  className="mx-auto object-contain"
-                  unoptimized
-                />
+                <h1 className="font-headline text-4xl md:text-6xl font-extrabold tracking-tight text-foreground uppercase">
+                    Where Creative Vision Meets Intelligent Technology
+                </h1>
                 <div className="mt-6 bg-card/60 backdrop-blur-sm p-6 rounded-lg max-w-3xl mx-auto">
                   <p className="text-xl text-foreground/90">
                       We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
