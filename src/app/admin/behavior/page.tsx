@@ -11,10 +11,12 @@ import { useAuth } from '@/contexts/auth-context';
 export default function BehaviorPage() {
     const [pageViews, setPageViews] = useState<PageView[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth();
 
     useEffect(() => {
-        if (!user) return; // Don't fetch data if user is not authenticated
+        if (authLoading || !user) {
+            return;
+        }
 
         async function fetchData() {
             setIsLoading(true);
@@ -28,7 +30,7 @@ export default function BehaviorPage() {
             }
         }
         fetchData();
-    }, [user]);
+    }, [user, authLoading]);
 
     const totalViews = pageViews.length;
     const uniqueSessions = new Set(pageViews.map(v => v.sessionId)).size;
