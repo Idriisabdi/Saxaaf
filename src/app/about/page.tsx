@@ -19,10 +19,7 @@ export default function AboutPage() {
                         Saxaaf Network is a premier integrated digital agency positioned at the intersection of creative storytelling and intelligent technology. Founded on the principle that modern success requires a seamless fusion of both art and engineering, we provide a comprehensive suite of services designed to build brands, captivate audiences, and drive measurable growth.
                     </p>
                     <p>
-                        We are a new breed of digital partner, composed of a diverse team of master storytellers, brand strategists, software engineers, and AI specialists. We believe that the most compelling brand experiences are created when captivating Media Production and Content Creation are built upon a foundation of powerful, scalable Web & Software Design. By infusing this entire process with insightful AI System Analysis, we move beyond simply completing projects—we architect sustainable competitive advantages for our clients.
-                    </p>
-                    <p>
-                        Our commitment to our clients transcends the traditional vendor relationship. We operate as a dedicated strategic partner, deeply invested in your growth and equipped to navigate the complexities of the digital frontier with you. Our ultimate purpose is to ensure your vision is not only realized but amplified, creating a measurable and lasting impact in your market and beyond.
+                        We are a new breed of digital partner, composed of a diverse team of master storytellers, brand strategists, software engineers, and AI specialists.
                     </p>
                 </div>
             </div>
