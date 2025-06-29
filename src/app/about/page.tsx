@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-hidden">
       <div className="container mx-auto px-4 py-0.5 animate-in fade-in duration-500">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="animate-in fade-in slide-in-from-left-8 duration-700">
                 <CompanyOverviewAnimation className="w-full h-auto max-w-md mx-auto" />
             </div>
