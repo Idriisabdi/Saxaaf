@@ -23,6 +23,7 @@ import {
   MessageSquare,
   LogOut,
   Loader2,
+  TrendingUp,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/auth-context';
@@ -31,6 +32,7 @@ import { useEffect } from 'react';
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/admin/behavior', label: 'Behavior', icon: TrendingUp },
   { href: '/admin/chat', label: 'Chat', icon: MessageSquare },
   { href: '/admin/users', label: 'Users', icon: Users },
   { href: '/admin/settings', label: 'Settings', icon: Settings },

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import ChatWidget from '@/components/chat-widget';
+import PageViewTracker from '@/components/page-view-tracker';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -16,6 +17,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
     return (
         <>
+            <PageViewTracker />
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
