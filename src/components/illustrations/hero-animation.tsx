@@ -20,14 +20,14 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
     >
       <defs>
         <linearGradient id="creative-stream-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0" />
+          <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0.1" />
           <stop offset="50%" stopColor="hsl(var(--secondary))" stopOpacity="1" />
-          <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0" />
+          <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0.1" />
         </linearGradient>
         <linearGradient id="tech-stream-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
           <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
-          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
         </linearGradient>
         <filter id="glow-filter">
           <feGaussianBlur stdDeviation="5" result="coloredBlur" />
@@ -99,7 +99,7 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
       `}</style>
 
       {/* Background Grids */}
-      <g opacity="0.1" stroke="hsl(var(--primary))" strokeWidth="0.5">
+      <g opacity="0.2" stroke="hsl(var(--primary))" strokeWidth="0.5">
           {Array.from({ length: 20 }).map((_, i) => (
               <line key={'v-' + i} x1={i * 40} y1="0" x2={i * 40} y2="600" />
           ))}
@@ -126,7 +126,7 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
            </circle>
         ))}
         {/* Creative Icons */}
-        <g fill="hsl(var(--secondary))" opacity="0.5">
+        <g fill="hsl(var(--secondary))" opacity="0.7">
           <path className="creative-icon" d="M 200 180 l 15 10 l -15 10 z" style={{ animationDelay: '0s' }}/>
           <circle className="creative-icon" cx="250" cy="350" r="10" style={{ animationDelay: '2s' }}/>
           <path className="creative-icon" d="M 150 450 q 10 -20 20 0 t 20 0" stroke="hsl(var(--secondary))" strokeWidth="2" fill="none" style={{ animationDelay: '4s' }} />
@@ -137,7 +137,7 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
       <g>
         <path className="tech-stream-path" d="M 400,300 C 600,100 550,500 750,300" fill="none" stroke="url(#tech-stream-gradient)" strokeWidth="2" />
         {/* Tech UI Wireframe */}
-        <g className="tech-ui" transform="translate(450, 150)" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity="0.1" strokeWidth="1">
+        <g className="tech-ui" transform="translate(450, 150)" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity="0.15" strokeWidth="1">
             <rect x="0" y="0" width="250" height="300" rx="10" />
             <line x1="0" y1="40" x2="250" y2="40" />
             <rect x="10" y="10" width="20" height="20" rx="4" fillOpacity="1" />
