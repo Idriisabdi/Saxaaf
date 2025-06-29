@@ -12,12 +12,7 @@ export default function HomePage() {
       <div className="container relative z-10 mx-auto min-h-[calc(100vh-3.5rem)] px-4">
         <div className="grid h-full grid-cols-1 items-center gap-12 py-16 md:grid-cols-2 md:py-24">
           <div className="flex flex-col items-center text-center md:items-start md:text-left animate-in fade-in slide-in-from-left-8 duration-700">
-            <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl flex flex-col items-center md:items-start">
-              <Logo className="h-20 w-auto mb-4" />
-              <span className="block text-primary">
-                MEETS INTELLIGENT TECHNOLOGY
-              </span>
-            </h1>
+            <Logo className="h-24 w-auto mb-6" />
             <p className="mx-auto mt-6 max-w-lg text-lg text-foreground/80 md:mx-0">
               We are Saxaaf Network—a digital transformation partner that fuses
               world-class media production, enterprise-grade software development,
