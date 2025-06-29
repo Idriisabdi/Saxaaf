@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-secondary-foreground/20 pt-6 text-sm text-secondary-foreground/60 sm:flex-row sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Saxaaf Network. All rights reserved.</p>
-          <Link href="/lead-assessment" className="transition-colors hover:text-primary">
+          <Link href="/admin" className="transition-colors hover:text-primary">
             Admin Panel
           </Link>
         </div>
