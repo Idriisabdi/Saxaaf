@@ -59,19 +59,37 @@ export default function LeadAssessmentForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setAssessment(null);
+    
+    let result: AssessLeadOutput;
     try {
-      const result = await assessLead(values);
+      result = await assessLead(values);
       setAssessment(result);
-      await addLead(values, result);
       toast({
         title: 'Assessment Complete',
-        description: 'Your AI-powered business analysis has been generated.',
+        description: 'Your AI analysis is ready. Saving the results...',
       });
     } catch (error) {
       console.error('Assessment failed:', error);
       toast({
-        title: 'Error',
-        description: 'Failed to get assessment. Please try again.',
+        title: 'AI Assessment Error',
+        description: 'There was a problem generating the AI analysis. Please try again.',
+        variant: 'destructive',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await addLead(values, result);
+      toast({
+        title: 'Submission Saved',
+        description: 'Your assessment has been successfully saved to our system.',
+      });
+    } catch(error) {
+      console.error('Failed to save lead:', error);
+      toast({
+        title: 'Database Error',
+        description: 'We generated your assessment but could not save it. This is usually due to security rules. Please contact us directly.',
         variant: 'destructive',
       });
     } finally {
@@ -247,7 +265,7 @@ export default function LeadAssessmentForm() {
         </CardContent>
       </Card>
 
-      {isLoading && (
+      {isLoading && !assessment && (
          <div className="mt-8 text-center">
             <Bot className="w-12 h-12 mx-auto animate-bounce text-primary" />
             <p className="mt-4 text-muted-foreground">Our AI is preparing your business assessment...</p>
