@@ -15,7 +15,6 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/market-research", label: "Market Research" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -23,7 +22,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
           <Logo className="mr-6" />
@@ -33,8 +32,8 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "transition-colors hover:text-background/80",
-                  pathname === link.href ? "text-background" : "text-background/60"
+                  "transition-colors hover:text-foreground/80",
+                  pathname === link.href ? "text-foreground font-semibold" : "text-foreground/60"
                 )}
               >
                 {link.label}
@@ -50,7 +49,6 @@ export default function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-background"
                 >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle Menu</span>

@@ -20,12 +20,14 @@ import {
   Users,
   Settings,
   ArrowLeft,
+  MessageSquare,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/admin/chat', label: 'Chat', icon: MessageSquare },
   { href: '/admin/users', label: 'Users', icon: Users },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
