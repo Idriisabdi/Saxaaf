@@ -37,9 +37,11 @@ export default function Home() {
                 <h1 className="font-headline text-4xl md:text-6xl font-extrabold tracking-tight text-foreground uppercase">
                     Where Creative Vision Meets Intelligent Technology
                 </h1>
-                <p className="mt-6 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
-                </p>
+                <div className="mt-6 bg-card/60 backdrop-blur-sm p-6 rounded-lg max-w-3xl mx-auto">
+                  <p className="text-xl text-foreground/90">
+                      We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
+                  </p>
+                </div>
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Button size="lg" asChild>
                         <Link href="/services">
