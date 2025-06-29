@@ -34,9 +34,6 @@ export default function Home() {
               <div className="mb-4">
                 <Logo className="h-16 w-auto mx-auto md:mx-0" />
               </div>
-              <h1 className="mt-4 text-2xl font-semibold text-primary sm:text-3xl font-headline uppercase">
-                WHERE CREATIVE VISION MEETS INTELLIGENT TECHNOLOGY
-              </h1>
               <p className="mt-6 text-lg text-foreground/80 max-w-xl mx-auto md:mx-0">
                 We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
               </p>
