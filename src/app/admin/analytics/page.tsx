@@ -7,6 +7,7 @@ import { getLeads, type Lead } from '@/services/lead-service';
 import { format, parseISO, startOfMonth, startOfWeek } from 'date-fns';
 import { Loader2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useAuth } from '@/contexts/auth-context';
 
 const COLORS = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--destructive))', '#8884d8', '#82ca9d', '#ffc658'];
 
@@ -16,8 +17,11 @@ export default function AnalyticsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [timeframe, setTimeframe] = useState<Timeframe>('all');
+  const { user } = useAuth();
 
   useEffect(() => {
+    if (!user) return; // Don't fetch data if user is not authenticated
+
     async function fetchLeads() {
       setIsLoading(true);
       try {
@@ -30,7 +34,7 @@ export default function AnalyticsPage() {
       }
     }
     fetchLeads();
-  }, []);
+  }, [user]);
 
   const filteredLeads = leads.filter(lead => {
     if (timeframe === 'all') return true;

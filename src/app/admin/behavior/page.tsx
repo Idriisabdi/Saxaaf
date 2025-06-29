@@ -6,12 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { getPageViews, type PageView } from '@/services/tracking-service';
 import { Loader2, Eye, Users } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useAuth } from '@/contexts/auth-context';
 
 export default function BehaviorPage() {
     const [pageViews, setPageViews] = useState<PageView[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { user } = useAuth();
 
     useEffect(() => {
+        if (!user) return; // Don't fetch data if user is not authenticated
+
         async function fetchData() {
             setIsLoading(true);
             try {
@@ -24,7 +28,7 @@ export default function BehaviorPage() {
             }
         }
         fetchData();
-    }, []);
+    }, [user]);
 
     const totalViews = pageViews.length;
     const uniqueSessions = new Set(pageViews.map(v => v.sessionId)).size;

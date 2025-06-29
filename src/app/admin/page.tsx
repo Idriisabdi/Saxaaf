@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Users, AlertTriangle, Loader2 } from 'lucide-react';
 import { getLeads, type Lead } from '@/services/lead-service';
 import { format } from 'date-fns';
+import { useAuth } from '@/contexts/auth-context';
 
 function getPriorityBadge(priority: 'high' | 'medium' | 'low') {
   switch (priority) {
@@ -37,8 +38,11 @@ function getPriorityBadge(priority: 'high' | 'medium' | 'low') {
 export default function AdminDashboardPage() {
   const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
+    if (!user) return; // Don't fetch data if user is not authenticated
+
     async function fetchLeads() {
       try {
         const leads = await getLeads();
@@ -50,7 +54,7 @@ export default function AdminDashboardPage() {
       }
     }
     fetchLeads();
-  }, []);
+  }, [user]);
 
   const totalLeads = recentLeads.length;
   const highPriorityLeads = recentLeads.filter(
