@@ -7,11 +7,13 @@ type LogoProps = {
   className?: string;
   onClick?: () => void;
   width?: number;
-  height?: number;
 } & Omit<ComponentProps<typeof Link>, 'href' | 'onClick'>;
 
 
-export default function Logo({ className, onClick, width = 160, height = 40, ...props }: LogoProps) {
+export default function Logo({ className, onClick, width = 160, ...props }: LogoProps) {
+  // Assume a 4:1 aspect ratio based on original defaults (160x40)
+  const height = width / 4;
+
   const content = (
     <Image
       src="/image/logo.png"
@@ -19,6 +21,7 @@ export default function Logo({ className, onClick, width = 160, height = 40, ...
       width={width}
       height={height}
       className="object-contain"
+      priority
     />
   );
 
