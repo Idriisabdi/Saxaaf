@@ -7,7 +7,6 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Logo from "@/components/logo";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -26,7 +25,9 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
-          <Logo className="mr-6" />
+          <Link href="/" className="mr-6 font-headline text-xl font-bold flex items-center">
+            SAXAAF NETWORK
+          </Link>
           <nav className="flex items-center gap-6 text-sm">
             {navLinks.map((link) => (
               <Link
@@ -56,10 +57,13 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-xs pr-0">
-                <Logo
-                  className="mr-6 mb-8"
+                <Link
+                  href="/"
+                  className="mr-6 mb-8 font-headline text-xl font-bold"
                   onClick={() => setIsOpen(false)}
-                />
+                >
+                 SAXAAF NETWORK
+                </Link>
                 <div className="flex flex-col space-y-3">
                   {navLinks.map((link) => (
                     <Link
@@ -79,7 +83,9 @@ export default function Header() {
             </Sheet>
           </div>
           <div className="flex items-center md:hidden">
-            <Logo />
+            <Link href="/" className="font-headline text-lg font-bold">
+              SAXAAF NETWORK
+            </Link>
           </div>
           <Button asChild>
             <Link href="/lead-assessment">

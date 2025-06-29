@@ -14,7 +14,6 @@ import {
   SidebarMenuButton,
   SidebarInset,
 } from '@/components/ui/sidebar';
-import Logo from '@/components/logo';
 import {
   LayoutDashboard,
   BarChart3,
@@ -43,7 +42,9 @@ export default function AdminLayout({
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center justify-between">
-            <Logo />
+            <Link href="/" className="font-headline text-lg font-bold">
+              Saxaaf
+            </Link>
             <SidebarTrigger />
           </div>
         </SidebarHeader>

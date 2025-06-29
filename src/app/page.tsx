@@ -7,8 +7,6 @@ import HeroAnimation from '@/components/illustrations/hero-animation';
 import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
 import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
 import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
-import Image from 'next/image';
-import Logo from '@/components/logo';
 
 const services = [
   {
@@ -36,7 +34,9 @@ export default function Home() {
         <HeroAnimation className="absolute inset-0 w-full h-full object-cover opacity-20" />
         <div className="container px-4 z-10 text-center">
             <div className="max-w-4xl mx-auto animate-in fade-in zoom-in-95 duration-700">
-                <Logo className="mx-auto" width={400} height={100} />
+                <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight text-foreground uppercase">
+                  Saxaaf Network
+                </h1>
                 <div className="mt-6 bg-card/60 backdrop-blur-sm p-6 rounded-lg max-w-3xl mx-auto">
                   <p className="text-xl text-foreground/90">
                       We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
