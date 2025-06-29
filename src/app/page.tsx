@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Rocket, Building, Globe, Sparkles } from 'lucide-react';
+import { ArrowRight, Rocket, Building, Globe, Sparkles, Film, Code, BrainCircuit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import HeroAnimation from '@/components/illustrations/hero-animation';
@@ -39,6 +39,59 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Integrated Services Section */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <h2 className="font-headline text-3xl font-bold uppercase tracking-tight">Our Integrated Services</h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+              We offer a comprehensive suite of services designed to work in synergy, providing our clients with a unified and powerful digital solution.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+              <CardHeader>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Film className="h-6 w-6" />
+                  </div>
+                  <CardTitle className="font-headline uppercase text-xl pt-4">Media Production & Content Creation</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground">
+                  We tell your story. Our creative team specializes in producing high-impact video content, from cinematic brand films to engaging social media campaigns and professional podcasts. We develop content strategies that build brand authority, captivate your target audience, and drive meaningful engagement.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+              <CardHeader>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Code className="h-6 w-6" />
+                  </div>
+                  <CardTitle className="font-headline uppercase text-xl pt-4">Web & Software Design</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground">
+                  We build your platform. Our development team engineers high-performance, scalable websites and custom software applications that are secure, intuitive, and optimized for growth. We create digital experiences that are not only visually stunning but also functionally robust.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+              <CardHeader>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <BrainCircuit className="h-6 w-6" />
+                  </div>
+                  <CardTitle className="font-headline uppercase text-xl pt-4">AI System Analysis & Building</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground">
+                  We unlock your intelligence. We leverage the power of artificial intelligence to automate processes, analyze complex data, and provide predictive insights. We build intelligent systems that give your business a decisive competitive advantage and tangible business outcomes.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* Target Audience Section */}
       <section className="bg-card/50 py-16 sm:py-24 border-y">
