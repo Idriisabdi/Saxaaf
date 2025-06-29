@@ -36,10 +36,10 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
       <style>{`
         @keyframes pulse-core {
           0%, 100% { transform: scale(1); opacity: 0.9; }
-          50% { transform: scale(1.03); opacity: 1; }
+          50% { transform: scale(1.05); opacity: 1; }
         }
         @keyframes creative-flow {
-          from { stroke-dashoffset: 800; }
+          from { stroke-dashoffset: 1200; }
           to { stroke-dashoffset: 0; }
         }
         @keyframes tech-flow {
@@ -47,36 +47,46 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
           to { stroke-dashoffset: 0; }
         }
         @keyframes tech-construct {
-          from { opacity: 0; transform: scale(0.8); }
-          to { opacity: 1; transform: scale(1); }
+          0% { opacity: 0; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(0.8); }
         }
-        @keyframes icon-fade {
-          0%, 100% { opacity: 0; transform: scale(0.5); }
-          50% { opacity: 0.7; transform: scale(1); }
+        @keyframes icon-fade-in-out {
+          0%, 100% { opacity: 0; transform: translateY(20px) scale(0.8); }
+          50% { opacity: 0.7; transform: translateY(0) scale(1); }
         }
         @keyframes particle-drift {
-          from { transform: translateX(0px); opacity: 1; }
-          to { transform: translateX(50px); opacity: 0; }
+          from { transform: translateX(0px) scale(1); opacity: 1; }
+          to { transform: translateX(50px) scale(0.5); opacity: 0; }
+        }
+        @keyframes synergy-burst {
+            0% { transform: scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
         .ai-core { animation: pulse-core 5s ease-in-out infinite; transform-origin: center; }
         .creative-stream-path {
-          stroke-dasharray: 800;
-          animation: creative-flow 8s ease-in-out infinite alternate;
+          stroke-dasharray: 1200;
+          animation: creative-flow 10s ease-in-out infinite alternate;
         }
         .tech-stream-path {
           stroke-dasharray: 800;
           animation: tech-flow 6s linear infinite;
         }
         .tech-ui {
-          animation: tech-construct 4s ease-in-out infinite alternate;
+          animation: tech-construct 6s ease-in-out infinite;
           transform-origin: 150px 300px;
         }
         .creative-icon {
-          animation: icon-fade 6s ease-in-out infinite;
+          animation: icon-fade-in-out 6s ease-in-out infinite;
           transform-origin: center;
         }
         .creative-particle {
-          animation: particle-drift 3s ease-in-out infinite;
+          animation: particle-drift 4s ease-in-out infinite;
+        }
+        .synergy-burst {
+            animation: synergy-burst 3s ease-out infinite;
+            transform-origin: center;
         }
       `}</style>
 
@@ -102,9 +112,9 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
       <g>
         <path className="creative-stream-path" d="M 400,300 C 200,100 250,500 50,300" fill="none" stroke="url(#creative-stream-gradient)" strokeWidth="40" filter="url(#glow-filter)"/>
         {/* Creative Particles */}
-        {Array.from({ length: 15 }).map((_, i) => (
-           <circle key={'p-' + i} className="creative-particle" r="2" fill="hsl(var(--secondary))" style={{ animationDelay: `${i * 0.2}s` }}>
-             <animateMotion dur="8s" repeatCount="indefinite" path="M 400,300 C 200,100 250,500 50,300" />
+        {Array.from({ length: 25 }).map((_, i) => (
+           <circle key={'p-' + i} className="creative-particle" r={1 + Math.random() * 2} fill="hsl(var(--secondary))" style={{ animationDelay: `${i * 0.15}s` }}>
+             <animateMotion dur="10s" repeatCount="indefinite" path="M 400,300 C 200,100 250,500 50,300" />
            </circle>
         ))}
         {/* Creative Icons */}
@@ -129,13 +139,17 @@ const HeroAnimation = (props: SVGProps<SVGSVGElement>) => {
         </g>
       </g>
 
-       {/* Synergy and Logo formation - simplified */}
+       {/* Synergy and Logo formation */}
        <g clipPath="url(#center-clip)">
             <g filter="url(#glow-filter)">
                 <path className="creative-stream-path" d="M50,300 C 350,200 350,400 400,300" stroke="hsl(var(--secondary))" strokeWidth="3" fill="none" style={{ animationDelay: '-2s' }}/>
                 <path className="tech-stream-path" d="M750,300 C 450,200 450,400 400,300" stroke="hsl(var(--primary))" strokeWidth="3" fill="none" style={{ animationDelay: '-1s' }}/>
             </g>
        </g>
+       <g transform="translate(400, 300)" filter="url(#glow-filter)">
+            <circle className="synergy-burst" cx="0" cy="0" r="50" fill="none" stroke="hsl(var(--foreground))" strokeWidth="2" style={{ animationDelay: '0s' }} />
+            <circle className="synergy-burst" cx="0" cy="0" r="30" fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" style={{ animationDelay: '0.5s' }} />
+        </g>
     </svg>
   );
 };
