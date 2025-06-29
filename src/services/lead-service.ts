@@ -1,52 +1,79 @@
+import { db } from '@/lib/firebase';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  serverTimestamp,
+  type Timestamp,
+} from 'firebase/firestore';
+import type { AssessLeadInput, AssessLeadOutput } from '@/ai/flows/assess-lead';
+
 export interface Lead {
   id: string;
   type: 'Consultation' | 'Contact';
   companyName?: string;
   name?: string;
   priority: 'high' | 'medium' | 'low';
-  date: string;
+  date: string; // ISO string
+  leadScore?: number;
+  rationale?: string;
+  nextSteps?: string;
 }
 
-const mockLeads: Lead[] = [
-  {
-    id: '1',
+function determinePriority(score: number): 'high' | 'medium' | 'low' {
+    if (score >= 75) return 'high';
+    if (score >= 40) return 'medium';
+    return 'low';
+}
+
+export async function addLead(
+  input: AssessLeadInput,
+  assessment: AssessLeadOutput
+): Promise<string> {
+  const leadsCollection = collection(db, 'leads');
+  const docRef = await addDoc(leadsCollection, {
     type: 'Consultation',
-    companyName: 'InnovateCorp',
-    priority: 'high',
-    date: new Date('2024-07-20T10:00:00Z').toISOString(),
-  },
-  {
-    id: '2',
-    type: 'Contact',
-    name: 'Jane Smith',
-    priority: 'medium',
-    date: new Date('2024-07-19T14:30:00Z').toISOString(),
-  },
-  {
-    id: '3',
-    type: 'Consultation',
-    companyName: 'Future Solutions',
-    priority: 'low',
-    date: new Date('2024-07-19T09:00:00Z').toISOString(),
-  },
-    {
-    id: '4',
-    type: 'Consultation',
-    companyName: 'Data Dynamics',
-    priority: 'high',
-    date: new Date('2024-07-18T16:00:00Z').toISOString(),
-  },
-  {
-    id: '5',
-    type: 'Contact',
-    name: 'Robert Brown',
-    priority: 'medium',
-    date: new Date('2024-07-17T11:45:00Z').toISOString(),
-  },
-];
+    companyName: input.companyName,
+    industry: input.industry,
+    companySize: input.companySize,
+    leadDescription: input.leadDescription,
+    leadScore: assessment.leadScore,
+    rationale: assessment.rationale,
+    nextSteps: assessment.nextSteps,
+    priority: determinePriority(assessment.leadScore),
+    date: serverTimestamp(),
+  });
+  return docRef.id;
+}
 
 export async function getLeads(): Promise<Lead[]> {
-  // In a real app, you'd fetch this from a database.
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return mockLeads;
+  const leadsCollection = collection(db, 'leads');
+  const q = query(leadsCollection, orderBy('date', 'desc'));
+  
+  try {
+    const querySnapshot = await getDocs(q);
+    const leads: Lead[] = [];
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        leads.push({
+        id: doc.id,
+        type: data.type || 'Contact',
+        companyName: data.companyName,
+        name: data.name,
+        priority: data.priority || 'low',
+        date: (data.date as Timestamp)?.toDate().toISOString() || new Date().toISOString(),
+        leadScore: data.leadScore,
+        rationale: data.rationale,
+        nextSteps: data.nextSteps,
+        });
+    });
+    return leads;
+  } catch (error) {
+    console.error("Error fetching leads: ", error);
+    // Return empty array on error to prevent crashing the admin page,
+    // which can happen if Firestore rules are not set up correctly.
+    return [];
+  }
 }

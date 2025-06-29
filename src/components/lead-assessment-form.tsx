@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { assessLead, AssessLeadOutput } from '@/ai/flows/assess-lead';
+import { assessLead, type AssessLeadOutput } from '@/ai/flows/assess-lead';
+import { addLead } from '@/services/lead-service';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,7 +21,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
-import { Bot, FileText, Target } from 'lucide-react';
+import { Bot, FileText, Target, Sparkles } from 'lucide-react';
 
 const formSchema = z.object({
   companyName: z.string().min(2, 'Company name is required.'),
@@ -50,11 +51,16 @@ export default function LeadAssessmentForm() {
     try {
       const result = await assessLead(values);
       setAssessment(result);
+      await addLead(values, result);
+      toast({
+        title: 'Consultation Complete',
+        description: 'Your AI-powered analysis has been saved.',
+      });
     } catch (error) {
       console.error('Assessment failed:', error);
       toast({
         title: 'Error',
-        description: 'Failed to assess lead. Please try again.',
+        description: 'Failed to get consultation. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -66,7 +72,7 @@ export default function LeadAssessmentForm() {
     <div>
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-2xl">Lead Information</CardTitle>
+          <CardTitle className="font-headline text-2xl flex items-center gap-2"><Sparkles className="w-6 h-6 text-primary" />Consultation Details</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -115,10 +121,10 @@ export default function LeadAssessmentForm() {
                 name="leadDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Lead Description</FormLabel>
+                    <FormLabel>Project Description</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Describe the lead, their potential needs, and any relevant context."
+                        placeholder="Describe your project, goals, and any relevant context."
                         rows={5}
                         {...field}
                       />
@@ -128,7 +134,7 @@ export default function LeadAssessmentForm() {
                 )}
               />
               <Button type="submit" disabled={isLoading} className="w-full">
-                {isLoading ? 'Assessing...' : 'Assess Lead'}
+                {isLoading ? 'Analyzing...' : 'Get AI Consultation'}
               </Button>
             </form>
           </Form>
@@ -138,18 +144,18 @@ export default function LeadAssessmentForm() {
       {isLoading && (
          <div className="mt-8 text-center">
             <Bot className="w-12 h-12 mx-auto animate-bounce text-primary" />
-            <p className="mt-4 text-muted-foreground">AI is analyzing the lead...</p>
+            <p className="mt-4 text-muted-foreground">Our AI is preparing your consultation...</p>
          </div>
       )}
 
       {assessment && (
         <Card className="mt-8 animate-fade-in">
           <CardHeader>
-            <CardTitle className="font-headline text-2xl">Assessment Result</CardTitle>
+            <CardTitle className="font-headline text-2xl">Consultation Result</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <FormLabel>Lead Score</FormLabel>
+              <FormLabel>Lead Potential Score</FormLabel>
               <div className="flex items-center gap-4 mt-2">
                 <Progress value={assessment.leadScore} className="w-full" />
                 <span className="font-bold text-lg text-primary">{assessment.leadScore}/100</span>
