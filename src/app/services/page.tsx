@@ -115,7 +115,7 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 bg-card/80 backdrop-blur-sm"
+              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500"
               style={{ animationDelay: `${(index + 1) * 150}ms` }}
             >
               <CardHeader>
@@ -146,7 +146,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Process Section */}
-      <div className="bg-card/80 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="bg-card border-y animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="container mx-auto px-4 pt-16 pb-24 sm:pt-24 sm:pb-32">
           <div className="mb-16 text-center">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight md:text-4xl uppercase flex items-center justify-center gap-4">
