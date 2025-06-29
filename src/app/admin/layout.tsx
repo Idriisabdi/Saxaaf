@@ -47,7 +47,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login');
+      router.push('/portal');
     }
   }, [user, loading, router]);
 

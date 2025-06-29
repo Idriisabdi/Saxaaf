@@ -8,7 +8,7 @@ import ChatWidget from '@/components/chat-widget';
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdminPage = pathname.startsWith('/admin');
-    const isLoginPage = pathname === '/login';
+    const isLoginPage = pathname === '/portal';
 
     if (isAdminPage || isLoginPage) {
         return <>{children}</>;
