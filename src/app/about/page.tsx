@@ -51,9 +51,9 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-card py-24 sm:py-32 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="bg-background py-24 sm:py-32 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="container mx-auto max-w-4xl px-4">
-          <Card className="shadow-none border-none">
+          <Card>
             <CardHeader className="text-center p-6">
                <CardTitle className="font-headline text-3xl font-bold uppercase flex items-center justify-center gap-4">
                   <Sparkles className="h-8 w-8 text-primary animate-pulse" />
