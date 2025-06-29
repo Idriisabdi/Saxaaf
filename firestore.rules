@@ -2,47 +2,37 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // LEADS: Allows public form submissions, but only authenticated
-    // admins can read or manage the data.
+  
+    // LEADS & CONTACTS: Allows anyone to submit forms, but only
+    // authenticated admins can read or manage the data.
     match /leads/{leadId} {
       allow create: if true;
       allow read, update, delete: if request.auth != null;
     }
-
-    // CONTACTS: Allows public form submissions, but only authenticated
-    // admins can read or manage the data.
     match /contacts/{contactId} {
       allow create: if true;
       allow read, update, delete: if request.auth != null;
     }
 
-    // BEHAVIOR ANALYTICS: Allows public page view tracking, but only
+    // CHAT: Allows anyone to create a chat session and send messages.
+    // Admins have full access to manage and read all conversations.
+    match /chats/{chatId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+      
+      match /messages/{messageId} {
+        // Allows any user (even unauthenticated) to send a message to a chat.
+        // Admins can read all messages.
+        allow create: if true;
+        allow read, update, delete: if request.auth != null;
+      }
+    }
+    
+    // BEHAVIOR ANALYTICS: Allows anyone to log a page view, but only
     // authenticated admins can read the collected data.
     match /pageViews/{viewId} {
       allow create: if true;
       allow read: if request.auth != null;
-      allow update, delete: if false; // Data should be immutable
-    }
-
-    // CHAT: Manages permissions for live chat sessions.
-    match /chats/{chatId} {
-      // Anyone can create a new chat session.
-      allow create: if true;
-
-      // Anyone can read or update the main chat document for session info,
-      // typing status, and last message updates.
-      allow read, update: if true;
-
-      // Only authenticated admins can delete an entire chat session.
-      allow delete: if request.auth != null;
-
-      // Messages can be created and read by anyone with the chat ID.
-      // They cannot be changed or deleted to preserve the conversation record.
-      match /messages/{messageId} {
-        allow read, create: if true;
-        allow update, delete: if false;
-      }
     }
   }
 }
