@@ -15,7 +15,7 @@ export default function Home() {
                 INTELLIGENT TECHNOLOGY
               </span>
             </h1>
-            <p className="max-w-2xl text-lg text-muted-foreground md:text-xl">
+            <p className="max-w-2xl text-3xl text-muted-foreground">
               We fuse world-class media production, powerful web & software
               design, and transformative AI systems to build the future of
               digital engagement.
