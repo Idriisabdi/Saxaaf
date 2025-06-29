@@ -5,17 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-hidden">
-      <div className="container mx-auto px-4 py-16 sm:py-24 animate-in fade-in duration-500">
-        <div className="text-center mb-16 animate-in fade-in zoom-in-95 duration-500">
-          <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl uppercase flex items-center justify-center gap-4">
-            <Sparkles className="h-10 w-10 text-primary animate-pulse" />
-            About Us
-          </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-foreground/80">
-            Fusing creative vision with intelligent technology to build the future of digital engagement.
-          </p>
-        </div>
-
+      <div className="container mx-auto px-4 py-8 sm:py-12 animate-in fade-in duration-500">
         <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="animate-in fade-in slide-in-from-left-8 duration-700">
                 <CompanyOverviewAnimation className="w-full h-auto max-w-lg mx-auto" />
