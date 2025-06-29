@@ -3,6 +3,7 @@ export const NAV_LINKS = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About Us" },
   { href: "/lead-assessment", label: "Lead Assessment" },
+  { href: "/technical-guide", label: "Tech Guide" },
 ];
 
 export const SERVICES = [
@@ -25,10 +26,10 @@ export const SERVICES = [
     dataAiHint: "digital technology"
   },
   {
-    slug: "market-analysis",
-    title: "Market Analysis",
+    slug: "market-research",
+    title: "Market Research",
     description: "In-depth market research to uncover insights and inform your business decisions.",
-    details: "Gain a competitive edge with our comprehensive market analysis. We provide detailed reports on market trends, consumer behavior, and competitive landscapes to help you make informed, data-driven decisions. Our insights help you identify new opportunities, mitigate risks, and better understand your customers' needs, enabling you to position your products and services for maximum impact.",
+    details: "Gain a competitive edge with our comprehensive market research. We provide detailed reports on market trends, consumer behavior, and competitive landscapes to help you make informed, data-driven decisions. Our insights help you identify new opportunities, mitigate risks, and better understand your customers' needs, enabling you to position your products and services for maximum impact.",
     icon: "area-chart",
     image: "https://placehold.co/1200x600.png",
     dataAiHint: "market trends"
