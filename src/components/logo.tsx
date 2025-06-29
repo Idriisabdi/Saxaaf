@@ -23,7 +23,7 @@ export default function Logo({ className, onClick, width = 160, height = 40, ...
     />
   );
 
-  const wrapperClasses = cn('flex items-center', className);
+  const wrapperClasses = cn('flex items-center justify-center', className);
 
   if (onClick) {
     return (
