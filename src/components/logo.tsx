@@ -1,28 +1,16 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 
 type LogoProps = {
   className?: string;
   onClick?: () => void;
-  asImage?: boolean;
-  width?: number;
-  height?: number;
 } & Omit<ComponentProps<typeof Link>, 'href' | 'onClick'>;
 
 
-export default function Logo({ className, onClick, asImage = false, width = 120, height = 40, ...props }: LogoProps) {
-  const content = asImage ? (
-    <Image
-        src="/image/log.png"
-        alt="Saxaaf Network Logo"
-        width={width}
-        height={height}
-        className="object-contain"
-      />
-  ) : (
+export default function Logo({ className, onClick, ...props }: LogoProps) {
+  const content = (
     <span className="font-headline text-2xl font-bold uppercase tracking-wider text-foreground">
       Saxaaf Network
     </span>

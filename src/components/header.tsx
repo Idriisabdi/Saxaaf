@@ -26,7 +26,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
-          <Logo asImage className="mr-6" />
+          <Logo className="mr-6" />
           <nav className="flex items-center gap-6 text-sm">
             {navLinks.map((link) => (
               <Link
@@ -57,7 +57,6 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-xs pr-0">
                 <Logo
-                  asImage
                   className="mr-6 mb-8"
                   onClick={() => setIsOpen(false)}
                 />
@@ -80,7 +79,7 @@ export default function Header() {
             </Sheet>
           </div>
           <div className="flex items-center md:hidden">
-            <Logo asImage />
+            <Logo />
           </div>
           <Button asChild>
             <Link href="/lead-assessment">
