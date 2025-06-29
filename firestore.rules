@@ -2,11 +2,47 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // WARNING: These rules are for debugging only and grant open access 
-    // to your entire database. This is not secure for a production environment.
-    // This allows all read and write operations from any user.
-    match /{document=**} {
-      allow read, write: if true;
+
+    // LEADS: Allows public form submissions, but only authenticated
+    // admins can read or manage the data.
+    match /leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // CONTACTS: Allows public form submissions, but only authenticated
+    // admins can read or manage the data.
+    match /contacts/{contactId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // BEHAVIOR ANALYTICS: Allows public page view tracking, but only
+    // authenticated admins can read the collected data.
+    match /pageViews/{viewId} {
+      allow create: if true;
+      allow read: if request.auth != null;
+      allow update, delete: if false; // Data should be immutable
+    }
+
+    // CHAT: Manages permissions for live chat sessions.
+    match /chats/{chatId} {
+      // Anyone can create a new chat session.
+      allow create: if true;
+
+      // Anyone can read or update the main chat document for session info,
+      // typing status, and last message updates.
+      allow read, update: if true;
+
+      // Only authenticated admins can delete an entire chat session.
+      allow delete: if request.auth != null;
+
+      // Messages can be created and read by anyone with the chat ID.
+      // They cannot be changed or deleted to preserve the conversation record.
+      match /messages/{messageId} {
+        allow read, create: if true;
+        allow update, delete: if false;
+      }
     }
   }
 }
