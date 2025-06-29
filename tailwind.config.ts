@@ -109,12 +109,22 @@ export default {
             transform: 'translateY(0)',
           },
         },
+        'animated-gradient': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+        'move-grid': {
+          from: { 'background-position': '0 0' },
+          to: { 'background-position': '-4rem -4rem' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.6s ease-in-out',
         'fade-in-up': 'fade-in-up 0.6s ease-in-out forwards',
+        'animated-gradient': 'animated-gradient 6s ease infinite',
+        'move-grid': 'move-grid 20s linear infinite',
       },
     },
   },

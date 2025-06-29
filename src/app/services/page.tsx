@@ -18,6 +18,7 @@ import AnimatedServiceIcons from '@/components/illustrations/AnimatedServiceIcon
 import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
 import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
 import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
+import BokehBackground from '@/components/illustrations/bokeh-background';
 
 const services = [
   {
@@ -94,7 +95,8 @@ const processSteps = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-background overflow-hidden">
+    <div className="bg-background overflow-hidden relative">
+      <BokehBackground />
       {/* Services Section */}
       <div className="relative container mx-auto px-4 py-16 sm:py-24 animate-in fade-in duration-500 overflow-hidden">
         <AnimatedServiceIcons />
@@ -113,7 +115,7 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 bg-card/50 backdrop-blur-sm"
+              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 bg-card/80 backdrop-blur-sm"
               style={{ animationDelay: `${(index + 1) * 150}ms` }}
             >
               <CardHeader>
@@ -144,7 +146,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Process Section */}
-      <div className="bg-card animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="bg-card/80 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="container mx-auto px-4 pt-16 pb-24 sm:pt-24 sm:pb-32">
           <div className="mb-16 text-center">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight md:text-4xl uppercase flex items-center justify-center gap-4">
