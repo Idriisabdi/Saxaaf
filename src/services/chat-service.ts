@@ -6,6 +6,14 @@ import { z } from 'zod';
 
 const sanitize = (text: string) => text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+const spamKeywords = ['crypto', 'forex', 'investment', 'free money', 'SEO service', 'marketing service', 'buy now'];
+
+const containsSpam = (text: string) => {
+    if (!text) return false;
+    const lowercasedText = text.toLowerCase();
+    return spamKeywords.some(keyword => lowercasedText.includes(keyword));
+};
+
 const MessageSchema = z.object({
     text: z.string().min(1).max(1000),
     sender: z.enum(['user', 'admin']),
@@ -17,6 +25,16 @@ export async function sendMessage(chatId: string, message: z.infer<typeof Messag
     if (!validatedMessage.success) {
         throw new Error('Invalid message data');
     }
+    
+    if (containsSpam(validatedMessage.data.text)) {
+        // We can choose to silently fail or throw an error.
+        // For a better UX, you might want to handle this on the client with a toast.
+        // For now, we'll just prevent the message from being sent.
+        console.warn(`Blocked spam message from chat ${chatId}`);
+        // Optionally, throw an error to notify the client.
+        throw new Error("Message blocked due to spam content.");
+    }
+
 
     const chatRef = doc(db, 'chats', chatId);
     const messagesCol = collection(chatRef, 'messages');
@@ -44,6 +62,10 @@ export async function sendMessage(chatId: string, message: z.infer<typeof Messag
 
 // Action to create a new chat session
 export async function createChat(userName: string, email: string, firstMessage?: string) {
+    if (containsSpam(userName) || (firstMessage && containsSpam(firstMessage))) {
+        throw new Error("Request blocked due to spam content.");
+    }
+    
     const sanitizedUserName = sanitize(userName);
     const sanitizedEmail = sanitize(email);
 

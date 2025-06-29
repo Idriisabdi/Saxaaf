@@ -19,18 +19,33 @@ const sanitize = (text: string) => {
     return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 };
 
+const spamKeywords = ['crypto', 'forex', 'investment', 'free money', 'SEO service', 'marketing service'];
+
+const containsSpam = (text: string) => {
+    if (!text) return false;
+    const lowercasedText = text.toLowerCase();
+    return spamKeywords.some(keyword => lowercasedText.includes(keyword));
+}
+
+
 export async function submitContactFormAction(data: FormValues) {
   const parsedData = formSchema.safeParse(data);
 
   if (!parsedData.success) {
     return { success: false, message: "Invalid form data." };
   }
+  
+  const { name, email, subject, message } = parsedData.data;
+  
+  if (containsSpam(name) || containsSpam(subject) || containsSpam(message)) {
+    return { success: false, message: "Your message appears to be spam and was blocked." };
+  }
 
   const sanitizedData = {
-    name: sanitize(parsedData.data.name),
-    email: sanitize(parsedData.data.email), // Email is validated, but sanitizing is good practice.
-    subject: sanitize(parsedData.data.subject),
-    message: sanitize(parsedData.data.message),
+    name: sanitize(name),
+    email: sanitize(email),
+    subject: sanitize(subject),
+    message: sanitize(message),
   };
 
   try {

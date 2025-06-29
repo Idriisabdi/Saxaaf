@@ -22,6 +22,19 @@ export interface Lead {
   nextSteps?: string;
 }
 
+const sanitize = (text: string | undefined) => {
+    if (!text) return "";
+    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
+
+const spamKeywords = ['crypto', 'forex', 'investment', 'free money', 'SEO service', 'marketing service'];
+
+const containsSpam = (text: string | undefined) => {
+    if (!text) return false;
+    const lowercasedText = text.toLowerCase();
+    return spamKeywords.some(keyword => lowercasedText.includes(keyword));
+};
+
 function determinePriority(score: number): 'high' | 'medium' | 'low' {
     if (score >= 75) return 'high';
     if (score >= 40) return 'medium';
@@ -32,19 +45,37 @@ export async function addLead(
   input: AssessLeadInput,
   assessment: AssessLeadOutput
 ): Promise<string> {
+
+  // Spam check for all major text fields
+  const isSpam = [
+    input.companyName,
+    input.industry,
+    input.businessModel,
+    input.targetAudience,
+    input.challenges,
+    input.goals,
+    input.onlinePresence,
+    input.competitors
+  ].some(field => containsSpam(field));
+
+  if (isSpam) {
+    // We can throw an error to be caught by the client form.
+    throw new Error("Submission blocked due to spam-like content.");
+  }
+  
   const leadsCollection = collection(db, 'leads');
   const docRef = await addDoc(leadsCollection, {
-    // Input data from the form
+    // Input data from the form (sanitized)
     type: 'Consultation',
-    companyName: input.companyName,
-    industry: input.industry,
-    companySize: input.companySize,
-    businessModel: input.businessModel,
-    targetAudience: input.targetAudience,
-    challenges: input.challenges,
-    goals: input.goals,
-    onlinePresence: input.onlinePresence || '',
-    competitors: input.competitors || '',
+    companyName: sanitize(input.companyName),
+    industry: sanitize(input.industry),
+    companySize: sanitize(input.companySize),
+    businessModel: sanitize(input.businessModel),
+    targetAudience: sanitize(input.targetAudience),
+    challenges: sanitize(input.challenges),
+    goals: sanitize(input.goals),
+    onlinePresence: sanitize(input.onlinePresence) || '',
+    competitors: sanitize(input.competitors) || '',
 
     // Assessment data from the AI
     leadScore: assessment.leadScore,
