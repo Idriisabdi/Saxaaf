@@ -20,14 +20,14 @@ const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivEle
      <style>{`
         @keyframes float {
           0% { transform: translate(0, 0px) rotate(0deg); }
-          50% { transform: translate(10px, -20px) rotate(10deg); }
+          50% { transform: translate(15px, -25px) rotate(15deg); }
           100% { transform: translate(0, 0px) rotate(0deg); }
         }
         .floating-icon {
           animation: float ease-in-out infinite;
           position: absolute;
           color: hsl(var(--primary));
-          opacity: 0.05;
+          opacity: 0.1;
         }
       `}</style>
     {icons.map(({ Icon, style, size }, index) => (
