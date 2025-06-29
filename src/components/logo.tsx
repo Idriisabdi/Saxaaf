@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 
@@ -12,12 +11,9 @@ type LogoProps = {
 
 export default function Logo({ className, onClick, ...props }: LogoProps) {
   const content = (
-      <Image
-        src="/IMAGE/log.svg"
-        width={256}
-        height={64}
-        alt="Saxaaf Network Logo"
-      />
+    <span className="font-headline text-2xl font-bold uppercase tracking-wider text-foreground">
+      Saxaaf Network
+    </span>
   );
 
   if (onClick) {
