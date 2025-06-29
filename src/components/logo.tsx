@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 import Image from 'next/image';
+import logoImage from '@/image/logo.png';
 
 type LogoProps = {
   className?: string;
@@ -16,7 +17,7 @@ export default function Logo({ className, onClick, width = 160, ...props }: Logo
 
   const content = (
     <Image
-      src="/image/logo.png"
+      src={logoImage}
       alt="Saxaaf Network Logo"
       width={width}
       height={height}
