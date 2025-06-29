@@ -7,12 +7,12 @@ import type { HTMLAttributes } from 'react';
 
 
 const icons = [
-  { Icon: Film, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 80 },
-  { Icon: CodeXml, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 90 },
-  { Icon: BrainCircuit, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 100 },
-  { Icon: Film, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 70 },
-  { Icon: CodeXml, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 60 },
-  { Icon: BrainCircuit, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 85 },
+  { Icon: Film, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 120 },
+  { Icon: CodeXml, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 135 },
+  { Icon: BrainCircuit, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 150 },
+  { Icon: Film, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 105 },
+  { Icon: CodeXml, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 90 },
+  { Icon: BrainCircuit, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 125 },
 ];
 
 const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
@@ -27,7 +27,7 @@ const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivEle
           animation: float ease-in-out infinite;
           position: absolute;
           color: hsl(var(--primary));
-          opacity: 0.1;
+          opacity: 0.15;
         }
       `}</style>
     {icons.map(({ Icon, style, size }, index) => (
