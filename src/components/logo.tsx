@@ -1,69 +1,37 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 
 type LogoProps = {
   className?: string;
-} & Omit<ComponentProps<typeof Link>, 'href'>;
+  onClick?: () => void;
+} & Omit<ComponentProps<typeof Link>, 'href' | 'onClick'>;
 
-export default function Logo({ className, ...props }: LogoProps) {
+
+export default function Logo({ className, onClick, ...props }: LogoProps) {
+  const content = (
+      <Image
+        src="https://placehold.co/128x32.png"
+        width={128}
+        height={32}
+        alt="Saxaaf Network Logo"
+        data-ai-hint="company logo"
+      />
+  );
+
+  if (onClick) {
+    return (
+      <button onClick={onClick} className={cn('flex items-center', className)}>
+        {content}
+      </button>
+    )
+  }
+
   return (
-    <Link href="/" className={cn('flex items-center gap-2', className)} {...props}>
-      <style>
-        {`
-          @keyframes draw {
-            to {
-              stroke-dashoffset: 0;
-            }
-          }
-          @keyframes fadeIn {
-            to {
-              opacity: 1;
-            }
-          }
-          .saxaaf-logo-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: draw 2s ease-out forwards;
-          }
-          .net-logo-text {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in forwards 1.8s;
-          }
-        `}
-      </style>
-      <svg
-        className="h-8 w-auto"
-        viewBox="0 0 160 40"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Saxaaf Net Logo"
-      >
-        <text
-          x="0"
-          y="28"
-          fontFamily="Inter, sans-serif"
-          fontSize="24"
-          fontWeight="bold"
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          className="saxaaf-logo-path"
-        >
-          Saxaaf
-        </text>
-        <text
-          x="95"
-          y="28"
-          fontFamily="Inter, sans-serif"
-          fontSize="24"
-          fontWeight="bold"
-          fill="hsl(var(--foreground))"
-          className="net-logo-text"
-        >
-          Net
-        </text>
-      </svg>
+    <Link href="/" className={cn('flex items-center', className)} {...props}>
+      {content}
     </Link>
   );
 }
