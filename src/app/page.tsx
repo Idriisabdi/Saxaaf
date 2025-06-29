@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import HeroAnimation from '@/components/illustrations/hero-animation';
+import HeroFloatingIcons from '@/components/illustrations/HeroFloatingIcons';
 
 export default function Home() {
   return (
     <div className="w-full">
       <div className="container mx-auto">
         <div className="grid min-h-[calc(100vh-3.5rem)] items-center gap-8 px-4 py-16 md:grid-cols-2 md:py-24">
-          <div className="flex items-center justify-center animate-in fade-in zoom-in-95 duration-700 md:order-1">
+          <div className="relative flex items-center justify-center animate-in fade-in zoom-in-95 duration-700 md:order-1">
+            <HeroFloatingIcons />
             <HeroAnimation className="h-auto w-full max-w-4xl" />
           </div>
           <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-700 md:order-2">
