@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-hidden">
-      <div className="container mx-auto px-4 py-0.5 animate-in fade-in duration-500">
+      <div className="container mx-auto px-4 py-0.5 pb-24 animate-in fade-in duration-500">
         <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="animate-in fade-in slide-in-from-left-8 duration-700">
                 <CompanyOverviewAnimation className="w-full h-auto max-w-md mx-auto" />
@@ -80,6 +80,16 @@ export default function AboutPage() {
               </CardContent>
             </Card>
           </div>
+
+          <div className="mt-24 max-w-4xl mx-auto text-lg text-foreground/80 space-y-6 text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <p>
+                We believe that the most compelling brand experiences are created when captivating Media Production and Content Creation are built upon a foundation of powerful, scalable Web & Software Design. By infusing this entire process with insightful AI System Analysis, we move beyond simply completing projects—we architect sustainable competitive advantages for our clients.
+            </p>
+            <p>
+                Our commitment to our clients transcends the traditional vendor relationship. We operate as a dedicated strategic partner, deeply invested in your growth and equipped to navigate the complexities of the digital frontier with you. Our ultimate purpose is to ensure your vision is not only realized but amplified, creating a measurable and lasting impact in your market and beyond.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
