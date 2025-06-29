@@ -2,69 +2,44 @@
 
 import { Film, CodeXml, BrainCircuit, Sparkles, ArrowRight } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
+import type { HTMLAttributes } from 'react';
+
 
 const icons = [
-  { icon: Film, size: 'w-16 h-16' },
-  { icon: CodeXml, size: 'w-20 h-20' },
-  { icon: BrainCircuit, size: 'w-12 h-12' },
-  { icon: Sparkles, size: 'w-10 h-10' },
-  { icon: ArrowRight, size: 'w-14 h-14' },
-  { icon: Film, size: 'w-8 h-8' },
-  { icon: CodeXml, size: 'w-16 h-16' },
-  { icon: BrainCircuit, size: 'w-24 h-24' },
+  { Icon: Film, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 80 },
+  { Icon: CodeXml, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 90 },
+  { Icon: BrainCircuit, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 100 },
+  { Icon: Film, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 70 },
+  { Icon: CodeXml, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 60 },
+  { Icon: BrainCircuit, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 85 },
 ];
 
-const pseudoRandom = (seed: number) => {
-  let x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-};
+const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("absolute inset-0 -z-10 overflow-hidden pointer-events-none", className)} {...props}>
+     <style>{`
+        @keyframes float {
+          0% { transform: translate(0, 0px) rotate(0deg); }
+          50% { transform: translate(10px, -20px) rotate(10deg); }
+          100% { transform: translate(0, 0px) rotate(0deg); }
+        }
+        .floating-icon {
+          animation: float ease-in-out infinite;
+          position: absolute;
+          color: hsl(var(--primary));
+          opacity: 0.05;
+        }
+      `}</style>
+    {icons.map(({ Icon, style, size }, index) => (
+      <Icon
+        key={index}
+        className="floating-icon"
+        style={style as React.CSSProperties}
+        size={size}
+        strokeWidth={1}
+      />
+    ))}
+  </div>
+);
 
-export default function AnimatedServiceIcons() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-  
-  return (
-    <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
-       <style>
-        {`
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-          }
-          .floating-icon {
-            animation: float linear infinite;
-          }
-        `}
-      </style>
-      {icons.map((item, index) => {
-        const Icon = item.icon;
-        const top = `${pseudoRandom(index * 5) * 100}%`;
-        const left = `${pseudoRandom(index * 3) * 100}%`;
-        const duration = `${pseudoRandom(index * 7) * 10 + 10}s`;
-        const delay = `${pseudoRandom(index * 9) * 5}s`;
-
-        return (
-          <div
-            key={index}
-            className="floating-icon absolute text-primary/5"
-            style={{
-              top,
-              left,
-              animationDuration: duration,
-              animationDelay: delay,
-            }}
-          >
-            <Icon className={item.size} strokeWidth={1} />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+export default AnimatedServiceIcons;
