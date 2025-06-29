@@ -69,19 +69,16 @@ export default function ChatWidget() {
 
         try {
             if (chatId) {
+                // Existing chat: just send the message
                 await sendMessage(chatId, { text: messageText, sender: 'user' });
             } else {
-                let name = userName;
-                if (!name) {
-                    name = prompt("Please enter your name to start a chat:", "");
-                    if (!name || !name.trim()) {
-                        setIsLoading(false);
-                        return;
-                    }
-                    setUserName(name);
-                    localStorage.setItem('userName', name);
-                }
-                const newChatId = await createChat(name, messageText);
+                // New chat: generate a visitor name and create the chat
+                const randomId = Math.random().toString(36).substring(2, 8).toUpperCase();
+                const newUserName = `Visitor ${randomId}`;
+                setUserName(newUserName);
+                localStorage.setItem('userName', newUserName);
+                
+                const newChatId = await createChat(newUserName, messageText);
                 setChatId(newChatId);
                 localStorage.setItem('chatId', newChatId);
             }
