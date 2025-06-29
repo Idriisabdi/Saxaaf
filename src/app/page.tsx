@@ -1,23 +1,27 @@
 import Link from 'next/link';
+import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, BrainCircuit, CodeXml, Film } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import HeroAnimation from '@/components/illustrations/hero-animation';
 import Logo from '@/components/logo';
+import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
+import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
+import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
 
 const services = [
   {
-    icon: <Film className="h-8 w-8 mb-4 text-primary" />,
+    icon: <CameraLensIcon />,
     title: 'Media & Content Creation',
     description: 'Crafting compelling brand stories through video, podcasts, and content marketing.',
   },
   {
-    icon: <CodeXml className="h-8 w-8 mb-4 text-primary" />,
+    icon: <CodeBracketsIcon />,
     title: 'Web & Software Development',
     description: 'Building high-performance, scalable websites and custom applications.',
   },
   {
-    icon: <BrainCircuit className="h-8 w-8 mb-4 text-primary" />,
+    icon: <AiEyeIcon />,
     title: 'AI & Data Analytics',
     description: 'Deploying AI solutions and data analysis to drive innovation and efficiency.',
   },
@@ -73,7 +77,7 @@ export default function Home() {
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <CardHeader>
-                  {service.icon}
+                  {React.cloneElement(service.icon, { className: 'h-16 w-16 mx-auto mb-4' })}
                   <CardTitle className="uppercase font-bold text-xl">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>

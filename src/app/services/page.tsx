@@ -9,19 +9,19 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
-  Film,
-  CodeXml,
-  BrainCircuit,
   CheckCircle,
   ArrowRight,
   Sparkles,
 } from 'lucide-react';
 import ProcessIllustration from '@/components/illustrations/process-illustration';
 import AnimatedServiceIcons from '@/components/illustrations/AnimatedServiceIcons';
+import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
+import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
+import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
 
 const services = [
   {
-    icon: <Film />,
+    icon: <CameraLensIcon />,
     title: 'Media & Content Creation',
     description:
       'From brand films and promotional videos to podcast production and SEO-optimized content, we create media that captivates and converts.',
@@ -33,7 +33,7 @@ const services = [
     ],
   },
   {
-    icon: <CodeXml />,
+    icon: <CodeBracketsIcon />,
     title: 'Web & Software Development',
     description:
       'We design and build robust, mobile-first websites, and custom applications using modern, scalable technology.',
@@ -45,7 +45,7 @@ const services = [
     ],
   },
   {
-    icon: <BrainCircuit />,
+    icon: <AiEyeIcon />,
     title: 'AI & Data Analytics',
     description:
       'Leverage the power of AI with our consulting, predictive analytics, and custom solution development, including advanced RAG models.',
@@ -118,7 +118,7 @@ export default function ServicesPage() {
             >
               <CardHeader>
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    {React.cloneElement(service.icon, { className: 'h-8 w-8 animate-pulse' })}
+                    {React.cloneElement(service.icon, { className: 'h-10 w-10' })}
                   </div>
               </CardHeader>
               <CardContent className="flex flex-1 flex-col">
