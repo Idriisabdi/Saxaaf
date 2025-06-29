@@ -15,10 +15,10 @@ export interface Lead {
   type: 'Consultation' | 'Contact';
   companyName?: string;
   name?: string;
+  industry?: string;
   priority: 'high' | 'medium' | 'low';
   date: string; // ISO string
   leadScore?: number;
-  rationale?: string;
   nextSteps?: string;
 }
 
@@ -34,14 +34,26 @@ export async function addLead(
 ): Promise<string> {
   const leadsCollection = collection(db, 'leads');
   const docRef = await addDoc(leadsCollection, {
+    // Input data from the form
     type: 'Consultation',
     companyName: input.companyName,
     industry: input.industry,
     companySize: input.companySize,
-    leadDescription: input.leadDescription,
+    businessModel: input.businessModel,
+    targetAudience: input.targetAudience,
+    challenges: input.challenges,
+    goals: input.goals,
+    onlinePresence: input.onlinePresence || '',
+    competitors: input.competitors || '',
+
+    // Assessment data from the AI
     leadScore: assessment.leadScore,
-    rationale: assessment.rationale,
+    strategicSummary: assessment.strategicSummary,
+    swotAnalysis: assessment.swotAnalysis,
+    recommendedServices: assessment.recommendedServices,
     nextSteps: assessment.nextSteps,
+    
+    // Metadata
     priority: determinePriority(assessment.leadScore),
     date: serverTimestamp(),
   });
@@ -62,11 +74,13 @@ export async function getLeads(): Promise<Lead[]> {
         type: data.type || 'Contact',
         companyName: data.companyName,
         name: data.name,
+        industry: data.industry,
         priority: data.priority || 'low',
         date: (data.date as Timestamp)?.toDate().toISOString() || new Date().toISOString(),
         leadScore: data.leadScore,
-        rationale: data.rationale,
-        nextSteps: data.nextSteps,
+        // For dashboard view, only basic info is needed.
+        // The full data is in Firestore but not pulled here for performance.
+        nextSteps: data.nextSteps, 
         });
     });
     return leads;
