@@ -13,6 +13,12 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+// Simple sanitizer to prevent XSS by escaping HTML tags.
+const sanitize = (text: string) => {
+    if (!text) return "";
+    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
+
 export async function submitContactFormAction(data: FormValues) {
   const parsedData = formSchema.safeParse(data);
 
@@ -20,9 +26,16 @@ export async function submitContactFormAction(data: FormValues) {
     return { success: false, message: "Invalid form data." };
   }
 
+  const sanitizedData = {
+    name: sanitize(parsedData.data.name),
+    email: sanitize(parsedData.data.email), // Email is validated, but sanitizing is good practice.
+    subject: sanitize(parsedData.data.subject),
+    message: sanitize(parsedData.data.message),
+  };
+
   try {
     await addDoc(collection(db, "contacts"), {
-      ...parsedData.data,
+      ...sanitizedData,
       submittedAt: serverTimestamp(),
     });
     
