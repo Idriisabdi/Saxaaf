@@ -3,14 +3,15 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Palette, Zap, Puzzle, BrainCircuit, Database, Server, FileCode, Copy, Check } from "lucide-react";
+import { Palette, Zap, Puzzle, BrainCircuit, Database, Server, FileCode, Copy, Check, Shield } from "lucide-react";
 import GridBackground from "@/components/illustrations/grid-background";
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
 export default function TechnicalGuidePage() {
   const { toast } = useToast();
-  const [isCopied, setIsCopied] = useState(false);
+  const [isPromptCopied, setIsPromptCopied] = useState(false);
+  const [isRulesCopied, setIsRulesCopied] = useState(false);
 
   const prompt = `You are an AI-powered lead assessment tool. Analyze the following lead information and provide a lead score, rationale, and next steps.
 
@@ -21,11 +22,64 @@ Lead Description: {{{leadDescription}}}
 
 Consider factors like the company's industry, size, and the lead description to determine the potential value of the lead.  Provide a lead score between 0 and 100.`;
 
-  const handleCopy = () => {
+  const firestoreRules = `rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // LEADS & CONTACTS: Allows public form submission, but only authenticated
+    // admins can read or manage the data.
+    match /leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+    match /contacts/{contactId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // CHAT: Allows anyone to create a chat and send/receive messages,
+    // but only authenticated admins can manage the top-level chat documents.
+    match /chats/{chatId} {
+      // Allow anyone to create a chat session (pre-chat form)
+      allow create: if true;
+      // Allow authenticated admins to read/update/delete chat session metadata
+      allow read, update, delete: if request.auth != null;
+
+      // Allow anyone to read/write messages within their own chat session.
+      // This relies on client-side logic to only access the correct chat.
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+    }
+
+    // BEHAVIOR ANALYTICS: Allows anyone to log a page view, but only
+    // authenticated admins can read the collected data.
+    match /pageViews/{viewId} {
+      allow create: if true;
+      allow read: if request.auth != null;
+    }
+
+    // Fallback rule: Deny all other reads/writes by default for security.
+    match /{document=**} {
+        allow read, write: if false;
+    }
+  }
+}`;
+
+  const handlePromptCopy = () => {
     navigator.clipboard.writeText(prompt).then(() => {
-      setIsCopied(true);
-      toast({ title: "Copied!", description: "Prompt copied to clipboard." });
-      setTimeout(() => setIsCopied(false), 2000);
+      setIsPromptCopied(true);
+      toast({ title: "Copied!", description: "AI system prompt copied to clipboard." });
+      setTimeout(() => setIsPromptCopied(false), 2000);
+    });
+  };
+
+  const handleRulesCopy = () => {
+    navigator.clipboard.writeText(firestoreRules).then(() => {
+      setIsRulesCopied(true);
+      toast({ title: "Copied!", description: "Firestore rules copied to clipboard." });
+      setTimeout(() => setIsRulesCopied(false), 2000);
     });
   };
 
@@ -139,10 +193,10 @@ Consider factors like the company's industry, size, and the lead description to 
                         variant="ghost"
                         size="icon"
                         className="absolute top-2 right-2 h-7 w-7 text-muted-foreground hover:bg-muted-foreground/10 hover:text-foreground"
-                        onClick={handleCopy}
+                        onClick={handlePromptCopy}
                         aria-label="Copy prompt"
                       >
-                        {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                        {isPromptCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
                       </Button>
                     </div>
                   </AccordionContent>
@@ -156,15 +210,34 @@ Consider factors like the company's industry, size, and the lead description to 
               <CardTitle className="flex items-center gap-3"><Database className="w-6 h-6" /> Data & Persistence</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-start gap-4 bg-amber-50 border-l-4 border-amber-400 p-4 rounded-md">
-                  <Server className="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" />
-                  <div>
-                      <h3 className="font-bold text-amber-800">No Database Integration</h3>
-                      <p className="text-amber-700 text-base">
-                      This application does not include a database connection (like Firestore). The lead assessment form submits data directly to the Genkit AI flow for analysis, and the results are displayed on the client-side without being persisted. Any lead data is lost on page refresh.
-                      </p>
-                  </div>
-              </div>
+               <div className="space-y-4 text-base">
+                 <p>This application uses <strong>Firestore</strong> for data persistence, including leads, contacts, chat messages, and analytics. To ensure security, it is critical to configure Firestore Rules in your Firebase project.</p>
+
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="firestore-rules">
+                      <AccordionTrigger className="text-lg font-headline flex items-center gap-2">
+                          <Shield className="w-5 h-5 text-primary" /> View Firestore Rules
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="mb-2 text-sm text-muted-foreground">Copy and paste these rules into the 'Rules' tab of your Firestore database in the Firebase Console.</p>
+                         <div className="relative">
+                            <pre className="bg-muted p-4 pr-12 rounded-md text-sm overflow-x-auto">
+                              <code className="font-code">{firestoreRules}</code>
+                            </pre>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="absolute top-2 right-2 h-7 w-7 text-muted-foreground hover:bg-muted-foreground/10 hover:text-foreground"
+                              onClick={handleRulesCopy}
+                              aria-label="Copy Firestore Rules"
+                            >
+                              {isRulesCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                            </Button>
+                         </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
             </CardContent>
           </Card>
         </div>
