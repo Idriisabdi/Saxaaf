@@ -2,7 +2,7 @@ export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About Us" },
-  { href: "/lead-assessment", label: "Lead Assessment" },
+  { href: "/lead-assessment", label: "AI Consultation" },
   { href: "/technical-guide", label: "Tech Guide" },
 ];
 
