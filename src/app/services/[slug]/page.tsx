@@ -24,7 +24,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
   return (
     <div className="animate-fade-in">
       <section className="relative h-64 sm:h-80 md:h-96">
-        <Image src={service.image} alt={service.title} layout="fill" objectFit="cover" className="opacity-20" data-ai-hint={service.dataAiHint}/>
+        <Image src={service.image} alt={service.title} fill={true} className="object-cover opacity-20" data-ai-hint={service.dataAiHint}/>
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
         <div className="container mx-auto px-4 relative h-full flex flex-col justify-center items-center text-center">
             <h1 className="text-4xl md:text-6xl font-headline font-bold">{service.title}</h1>

@@ -28,7 +28,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
-               <Image src="https://placehold.co/600x400.png" alt="Our Team" layout="fill" objectFit="cover" data-ai-hint="team collaboration" />
+               <Image src="https://placehold.co/600x400.png" alt="Our Team" fill={true} className="object-cover" data-ai-hint="team collaboration" />
             </div>
           </div>
         </div>
