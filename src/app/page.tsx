@@ -23,9 +23,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="max-w-2xl text-xl text-muted-foreground">
-              We fuse world-class media production, powerful web & software
-              design, and transformative AI systems to build the future of
-              digital engagement.
+              We craft compelling narratives through world-class Media Production, build powerful digital platforms with expert Web & Software Design, and deploy transformative AI Systems to drive measurable growth and connect our clients with a global audience.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button asChild size="lg">
