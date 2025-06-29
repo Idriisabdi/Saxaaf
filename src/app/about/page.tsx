@@ -1,5 +1,6 @@
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Target, Eye, Gem } from 'lucide-react';
 import CompanyOverviewAnimation from '@/components/illustrations/CompanyOverviewAnimation';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function AboutPage() {
   return (
@@ -35,6 +36,63 @@ export default function AboutPage() {
                     </p>
                 </div>
             </div>
+        </div>
+
+        {/* Mission, Vision, Values Section */}
+        <div className="mt-24 sm:mt-32">
+          <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl uppercase flex items-center justify-center gap-4">
+               <Sparkles className="h-8 w-8 text-primary animate-pulse" />
+              Our Core Principles
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+              <CardHeader className="items-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Target className="h-8 w-8 animate-pulse" />
+                </div>
+                <CardTitle className="font-headline uppercase mt-4">Our Mission</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow text-foreground/80">
+                <p>
+                  To empower businesses by fusing creative storytelling with intelligent technology, delivering digital solutions that drive measurable growth and build lasting connections.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+              <CardHeader className="items-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Eye className="h-8 w-8 animate-pulse" />
+                </div>
+                <CardTitle className="font-headline uppercase mt-4">Our Vision</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow text-foreground/80">
+                <p>
+                  To be the leading digital partner in transforming how organizations engage with their audiences in the digital frontier, setting new standards for innovation and impact.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+              <CardHeader className="items-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Gem className="h-8 w-8 animate-pulse" />
+                </div>
+                <CardTitle className="font-headline uppercase mt-4">Our Values</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow text-foreground/80">
+                <ul className="space-y-2 text-left">
+                  <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Innovation:</strong> Relentlessly pursuing new ideas.</span></li>
+                  <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Partnership:</strong> Succeeding when our clients succeed.</span></li>
+                  <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Excellence:</strong> Delivering world-class quality.</span></li>
+                  <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Integrity:</strong> Operating with transparency and trust.</span></li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
