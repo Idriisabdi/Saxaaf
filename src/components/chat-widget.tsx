@@ -7,9 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
-import { createChat, sendMessage } from '@/services/chat-service';
+import { createChat, sendMessage, updateTypingStatus } from '@/services/chat-service';
 import { db } from '@/lib/firebase';
-import { collection, query, onSnapshot, orderBy, type Timestamp } from 'firebase/firestore';
+import { collection, query, onSnapshot, orderBy, type Timestamp, doc } from 'firebase/firestore';
+import { TypingIndicator } from '@/components/typing-indicator';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,7 +39,9 @@ export default function ChatWidget() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isAdminTyping, setIsAdminTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const preChatForm = useForm<PreChatValues>({
         resolver: zodResolver(PreChatSchema),
@@ -64,16 +67,28 @@ export default function ChatWidget() {
     useEffect(() => {
         if (!chatId) return;
 
-        const q = query(collection(db, 'chats', chatId, 'messages'), orderBy('timestamp', 'asc'));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        // Listener for messages
+        const messagesQuery = query(collection(db, 'chats', chatId, 'messages'), orderBy('timestamp', 'asc'));
+        const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
             const newMessages: Message[] = [];
             querySnapshot.forEach((doc) => {
                 newMessages.push({ id: doc.id, ...doc.data() } as Message);
             });
             setMessages(newMessages);
         });
+        
+        // Listener for chat metadata (like typing status)
+        const chatDocRef = doc(db, 'chats', chatId);
+        const unsubscribeChat = onSnapshot(chatDocRef, (doc) => {
+            if (doc.exists()) {
+                setIsAdminTyping(doc.data().isAdminTyping || false);
+            }
+        });
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeMessages();
+            unsubscribeChat();
+        };
     }, [chatId]);
     
     useEffect(scrollToBottom, [messages]);
@@ -98,6 +113,9 @@ export default function ChatWidget() {
         e.preventDefault();
         if (!inputValue.trim() || !chatId) return;
 
+        if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+        updateTypingStatus(chatId, 'user', false);
+
         setIsLoading(true);
         const messageText = inputValue;
         setInputValue('');
@@ -110,6 +128,22 @@ export default function ChatWidget() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+        if (!chatId) return;
+
+        if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+        } else {
+            updateTypingStatus(chatId, 'user', true);
+        }
+
+        typingTimeoutRef.current = setTimeout(() => {
+            updateTypingStatus(chatId, 'user', false);
+            typingTimeoutRef.current = null;
+        }, 2000);
     };
 
     const toggleChat = () => setIsOpen(!isOpen);
@@ -188,6 +222,14 @@ export default function ChatWidget() {
                                     {msg.sender === 'user' && <Avatar className="h-8 w-8"><AvatarFallback>{userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>}
                                 </div>
                             ))}
+                             {isAdminTyping && (
+                                <div className="flex gap-2 items-end justify-start">
+                                    <Avatar className="h-8 w-8"><AvatarFallback>A</AvatarFallback></Avatar>
+                                    <div className="bg-muted rounded-lg px-3 py-2">
+                                        <TypingIndicator />
+                                    </div>
+                                </div>
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
                     </CardContent>
@@ -195,11 +237,11 @@ export default function ChatWidget() {
                         <form onSubmit={handleSendMessage} className="flex w-full items-center space-x-2">
                             <Input 
                                 value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
+                                onChange={handleInputChange}
                                 placeholder="Type a message..."
                                 disabled={isLoading}
                             />
-                            <Button type="submit" size="icon" disabled={isLoading}>
+                            <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
                                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                             </Button>
                         </form>

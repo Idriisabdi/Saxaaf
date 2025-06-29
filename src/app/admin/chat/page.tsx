@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { db } from '@/lib/firebase';
 import { collection, query, onSnapshot, orderBy, doc, type Timestamp, updateDoc } from 'firebase/firestore';
-import { sendMessage } from '@/services/chat-service';
+import { sendMessage, updateTypingStatus } from '@/services/chat-service';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Send, Loader2 } from 'lucide-react';
+import { TypingIndicator } from '@/components/typing-indicator';
+import { Badge } from '@/components/ui/badge';
 
 interface ChatSession {
     id: string;
@@ -19,6 +21,8 @@ interface ChatSession {
     lastMessage: string;
     lastMessageAt: Timestamp | null;
     isReadByAdmin: boolean;
+    unreadCount?: number;
+    isUserTyping?: boolean;
 }
 
 interface Message {
@@ -32,9 +36,11 @@ export default function AdminChatPage() {
     const [sessions, setSessions] = useState<ChatSession[]>([]);
     const [selectedChat, setSelectedChat] = useState<ChatSession | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [isUserTyping, setIsUserTyping] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const q = query(collection(db, 'chats'), orderBy('lastMessageAt', 'desc'));
@@ -51,8 +57,9 @@ export default function AdminChatPage() {
     useEffect(() => {
         if (!selectedChat) return;
 
-        const q = query(collection(db, 'chats', selectedChat.id, 'messages'), orderBy('timestamp', 'asc'));
-        const unsubscribe = onSnapshot(q, (snapshot) => {
+        // Listener for messages
+        const messagesQuery = query(collection(db, 'chats', selectedChat.id, 'messages'), orderBy('timestamp', 'asc'));
+        const unsubscribeMessages = onSnapshot(messagesQuery, (snapshot) => {
             const newMessages: Message[] = [];
             snapshot.forEach((doc) => {
                 newMessages.push({ id: doc.id, ...doc.data() } as Message);
@@ -60,34 +67,66 @@ export default function AdminChatPage() {
             setMessages(newMessages);
         });
         
-        // Mark chat as read
-        if (!selectedChat.isReadByAdmin) {
-            const chatRef = doc(db, 'chats', selectedChat.id);
-            updateDoc(chatRef, { isReadByAdmin: true });
+        // Listener for chat metadata (like typing status)
+        const chatDocRef = doc(db, 'chats', selectedChat.id);
+        const unsubscribeChat = onSnapshot(chatDocRef, (doc) => {
+             if (doc.exists()) {
+                setIsUserTyping(doc.data().isUserTyping || false);
+             }
+        });
+
+        // Mark chat as read and reset unread count
+        if (!selectedChat.isReadByAdmin || (selectedChat.unreadCount && selectedChat.unreadCount > 0)) {
+            updateDoc(chatDocRef, { isReadByAdmin: true, unreadCount: 0 });
         }
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeMessages();
+            unsubscribeChat();
+        };
     }, [selectedChat]);
     
     const scrollToBottom = () => {
          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    useEffect(scrollToBottom, [messages]);
+    useEffect(scrollToBottom, [messages, isUserTyping]);
     
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!inputValue.trim() || !selectedChat) return;
+        
+        if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+        updateTypingStatus(selectedChat.id, 'admin', false);
     
         setIsLoading(true);
+        const messageText = inputValue;
+        setInputValue('');
+
         try {
-            await sendMessage(selectedChat.id, { text: inputValue, sender: 'admin' });
-            setInputValue('');
+            await sendMessage(selectedChat.id, { text: messageText, sender: 'admin' });
         } catch (error) {
             console.error("Failed to send message:", error);
+            setInputValue(messageText); // Restore input on failure
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+        if (!selectedChat) return;
+
+        if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+        } else {
+            updateTypingStatus(selectedChat.id, 'admin', true);
+        }
+
+        typingTimeoutRef.current = setTimeout(() => {
+            updateTypingStatus(selectedChat.id, 'admin', false);
+            typingTimeoutRef.current = null;
+        }, 2000);
     };
 
     return (
@@ -104,18 +143,23 @@ export default function AdminChatPage() {
                             className={cn(
                                 "p-4 cursor-pointer border-b hover:bg-muted/50",
                                 selectedChat?.id === session.id && "bg-muted",
-                                !session.isReadByAdmin && "font-bold"
                             )}
                             onClick={() => setSelectedChat(session)}
                         >
-                            <div className="flex justify-between">
-                                <p className="truncate">{session.userName}</p>
-                                <p className="text-xs text-muted-foreground whitespace-nowrap">
-                                    {session.lastMessageAt ? formatDistanceToNow(session.lastMessageAt.toDate(), { addSuffix: true }) : ''}
+                            <div className="flex justify-between items-center">
+                                <p className={cn("truncate", !session.isReadByAdmin && "font-bold")}>
+                                    {session.userName}
                                 </p>
+                                {session.unreadCount && session.unreadCount > 0 ? (
+                                    <Badge variant="destructive" className="h-5">{session.unreadCount}</Badge>
+                                ) : (
+                                    <p className="text-xs text-muted-foreground whitespace-nowrap">
+                                        {session.lastMessageAt ? formatDistanceToNow(session.lastMessageAt.toDate(), { addSuffix: true }) : ''}
+                                    </p>
+                                )}
                             </div>
                             <p className={cn("text-sm truncate text-muted-foreground", !session.isReadByAdmin && "text-foreground")}>
-                                {session.lastMessage}
+                                {session.isUserTyping ? <span className="italic">typing...</span> : session.lastMessage}
                             </p>
                         </div>
                     ))}
@@ -144,6 +188,14 @@ export default function AdminChatPage() {
                                         {msg.sender === 'admin' && <Avatar className="h-8 w-8"><AvatarFallback>A</AvatarFallback></Avatar>}
                                     </div>
                                 ))}
+                                {isUserTyping && (
+                                    <div className="flex gap-2 items-end justify-start">
+                                        <Avatar className="h-8 w-8"><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>
+                                        <div className="bg-muted rounded-lg px-3 py-2">
+                                            <TypingIndicator />
+                                        </div>
+                                    </div>
+                                )}
                                 <div ref={messagesEndRef} />
                             </div>
                         </div>
@@ -151,11 +203,11 @@ export default function AdminChatPage() {
                             <form onSubmit={handleSendMessage} className="flex items-center space-x-2">
                                 <Input 
                                     value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
+                                    onChange={handleInputChange}
                                     placeholder="Type your reply..."
                                     disabled={isLoading}
                                 />
-                                <Button type="submit" size="icon" disabled={isLoading}>
+                                <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
                                     {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                                 </Button>
                             </form>

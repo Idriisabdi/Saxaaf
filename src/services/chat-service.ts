@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, setDoc, updateDoc, increment } from 'firebase/firestore';
 import { z } from 'zod';
 
 const sanitize = (text: string) => text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -27,11 +27,19 @@ export async function sendMessage(chatId: string, message: z.infer<typeof Messag
         timestamp: serverTimestamp(),
     });
     
-    await updateDoc(chatRef, {
+    const updateData: any = {
         lastMessage: sanitize(validatedMessage.data.text),
         lastMessageAt: serverTimestamp(),
-        isReadByAdmin: message.sender === 'user' ? false : true,
-    });
+    };
+
+    if (message.sender === 'user') {
+        updateData.isReadByAdmin = false;
+        updateData.unreadCount = increment(1);
+    } else {
+        updateData.isReadByAdmin = true;
+    }
+
+    await updateDoc(chatRef, updateData);
 }
 
 // Action to create a new chat session
@@ -51,6 +59,9 @@ export async function createChat(userName: string, email: string, firstMessage?:
         lastMessage: lastMessage,
         lastMessageAt: serverTimestamp(),
         isReadByAdmin: false,
+        isUserTyping: false,
+        isAdminTyping: false,
+        unreadCount: firstMessage ? 1 : 0,
     });
 
     if (firstMessage) {
@@ -63,4 +74,11 @@ export async function createChat(userName: string, email: string, firstMessage?:
     }
 
     return newChatRef.id;
+}
+
+// Action to update typing status
+export async function updateTypingStatus(chatId: string, userType: 'user' | 'admin', isTyping: boolean) {
+    const chatRef = doc(db, 'chats', chatId);
+    const fieldToUpdate = userType === 'user' ? 'isUserTyping' : 'isAdminTyping';
+    await updateDoc(chatRef, { [fieldToUpdate]: isTyping });
 }
