@@ -13,10 +13,11 @@ type LogoProps = {
 export default function Logo({ className, onClick, ...props }: LogoProps) {
   const content = (
       <Image
-        src="/log.png"
+        src="https://placehold.co/256x64.png"
         width={256}
         height={64}
         alt="Saxaaf Network Logo"
+        data-ai-hint="logo"
       />
   );
 
