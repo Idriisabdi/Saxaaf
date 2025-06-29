@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import HeroAnimation from '@/components/illustrations/hero-animation';
-import Logo from '@/components/logo';
 import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
 import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
 import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
@@ -31,32 +30,28 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative flex-grow flex items-center justify-center overflow-hidden py-6 sm:py-8">
-        <div className="container px-4 z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className="text-center md:text-left animate-in fade-in slide-in-from-left duration-700">
-              <div className="mb-4">
-                <Logo className="h-16 w-auto mx-auto md:mx-0" />
-              </div>
-              <p className="mt-6 text-lg text-foreground/80 max-w-xl mx-auto md:mx-0">
-                We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
-              </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/services">
-                    Explore Our Services
-                    <ArrowRight className="ml-2" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/lead-assessment">Get a Free Consultation</Link>
-                </Button>
-              </div>
+      <section className="relative flex-grow flex items-center justify-center overflow-hidden py-24 sm:py-32">
+        <HeroAnimation className="absolute inset-0 w-full h-full object-cover opacity-20" />
+        <div className="container px-4 z-10 text-center">
+            <div className="max-w-4xl mx-auto animate-in fade-in zoom-in-95 duration-700">
+                <h1 className="font-headline text-4xl md:text-6xl font-extrabold tracking-tight text-foreground uppercase">
+                    Where Creative Vision Meets Intelligent Technology
+                </h1>
+                <p className="mt-6 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
+                    We integrate world-class media production, expert web & software design, and transformative AI systems to build your digital future and connect you with a global audience.
+                </p>
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Button size="lg" asChild>
+                        <Link href="/services">
+                            Explore Our Services
+                            <ArrowRight className="ml-2" />
+                        </Link>
+                    </Button>
+                    <Button size="lg" variant="outline" asChild>
+                        <Link href="/lead-assessment">Get a Free Consultation</Link>
+                    </Button>
+                </div>
             </div>
-            <div className="relative h-64 md:h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-700">
-               <HeroAnimation className="w-full h-full max-w-lg mx-auto" />
-            </div>
-          </div>
         </div>
       </section>
 
