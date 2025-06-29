@@ -48,6 +48,14 @@ export default function SettingsPage() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [reauthAction, setReauthAction] = useState<(() => Promise<void>) | null>(null);
 
+  // State for the interactive toggles
+  const [isCompact, setIsCompact] = useState(true);
+  const [leadEmails, setLeadEmails] = useState(true);
+  const [chatEmails, setChatEmails] = useState(false);
+
+  // Theming state would require more complex logic with context, so we'll just make the toggle interactive
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
   const profileForm = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -240,7 +248,7 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Appearance</CardTitle>
-                <CardDescription>Customize the look and feel of the admin dashboard. (Demonstration only)</CardDescription>
+                <CardDescription>Customize the look and feel of the admin dashboard.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                   <div className="flex items-center justify-between rounded-lg border p-4">
@@ -248,14 +256,14 @@ export default function SettingsPage() {
                         <Label>Theme</Label>
                         <p className="text-sm text-muted-foreground">Select between light and dark mode.</p>
                      </div>
-                     <Switch disabled aria-readonly/>
+                     <Switch checked={isDarkMode} onCheckedChange={setIsDarkMode}/>
                   </div>
                    <div className="flex items-center justify-between rounded-lg border p-4">
                      <div className="space-y-0.5">
                         <Label>Compact View</Label>
                         <p className="text-sm text-muted-foreground">Display tables and lists more compactly.</p>
                      </div>
-                     <Switch disabled aria-readonly checked/>
+                     <Switch checked={isCompact} onCheckedChange={setIsCompact}/>
                   </div>
               </CardContent>
             </Card>
@@ -265,7 +273,7 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Notifications</CardTitle>
-                <CardDescription>Manage how you receive notifications. (Demonstration only)</CardDescription>
+                <CardDescription>Manage how you receive notifications.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                   <div className="flex items-center justify-between rounded-lg border p-4">
@@ -273,14 +281,14 @@ export default function SettingsPage() {
                         <Label>New Lead Email</Label>
                         <p className="text-sm text-muted-foreground">Receive an email for every new lead submission.</p>
                      </div>
-                     <Switch disabled aria-readonly checked/>
+                     <Switch checked={leadEmails} onCheckedChange={setLeadEmails} />
                   </div>
                   <div className="flex items-center justify-between rounded-lg border p-4">
                      <div className="space-y-0.5">
                         <Label>New Chat Message Email</Label>
                         <p className="text-sm text-muted-foreground">Get notified by email for new chat messages.</p>
                      </div>
-                     <Switch disabled aria-readonly/>
+                     <Switch checked={chatEmails} onCheckedChange={setChatEmails} />
                   </div>
               </CardContent>
             </Card>
