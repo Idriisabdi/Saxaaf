@@ -22,6 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { Bot, FileText, Target, Sparkles, Check, Lightbulb, Shield, Swords, Goal } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 const formSchema = z.object({
   companyName: z.string().min(2, 'Company name is required.'),
@@ -260,7 +261,7 @@ export default function LeadAssessmentForm() {
           </CardHeader>
           <CardContent className="space-y-8">
             <div>
-              <FormLabel>Lead Potential Score</FormLabel>
+              <Label>Lead Potential Score</Label>
               <div className="flex items-center gap-4 mt-2">
                 <Progress value={assessment.leadScore} className="w-full" />
                 <span className="font-bold text-lg text-primary">{assessment.leadScore}/100</span>
