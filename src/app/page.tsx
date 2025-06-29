@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative flex-grow flex items-center justify-center overflow-hidden py-16 sm:py-24">
+      <section className="relative flex-grow flex items-center justify-center overflow-hidden py-10 sm:py-14">
         <div className="container px-4 z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="text-center md:text-left animate-in fade-in slide-in-from-left duration-700">
