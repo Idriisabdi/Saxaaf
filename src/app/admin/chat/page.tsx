@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Bot, MessageSquare } from 'lucide-react';
 import { TypingIndicator } from '@/components/typing-indicator';
 import { Badge } from '@/components/ui/badge';
 
@@ -39,7 +39,6 @@ export default function AdminChatPage() {
     const [isUserTyping, setIsUserTyping] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
@@ -86,12 +85,6 @@ export default function AdminChatPage() {
         };
     }, [selectedChat]);
     
-    const scrollToBottom = () => {
-         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    useEffect(scrollToBottom, [messages, isUserTyping]);
-    
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!inputValue.trim() || !selectedChat) return;
@@ -130,9 +123,9 @@ export default function AdminChatPage() {
     };
 
     return (
-        <div className="flex h-[calc(100vh-8rem)] border rounded-lg">
+        <div className="flex h-[calc(100vh-8rem)] border rounded-lg bg-card text-card-foreground">
             {/* Chat List */}
-            <div className="w-1/3 border-r flex flex-col">
+            <div className="w-1/3 border-r flex flex-col bg-background/50">
                 <div className="p-4 border-b">
                     <h2 className="text-xl font-bold">Conversations</h2>
                 </div>
@@ -141,28 +134,35 @@ export default function AdminChatPage() {
                         <div
                             key={session.id}
                             className={cn(
-                                "p-4 cursor-pointer border-b hover:bg-muted/50",
+                                "p-4 cursor-pointer border-b hover:bg-muted/50 transition-colors",
                                 selectedChat?.id === session.id && "bg-muted",
                             )}
                             onClick={() => setSelectedChat(session)}
                         >
                             <div className="flex justify-between items-center">
-                                <p className={cn("truncate", !session.isReadByAdmin && "font-bold")}>
+                                <p className={cn("truncate font-semibold", !session.isReadByAdmin && "text-primary")}>
                                     {session.userName}
                                 </p>
                                 {session.unreadCount && session.unreadCount > 0 ? (
                                     <Badge variant="destructive" className="h-5">{session.unreadCount}</Badge>
                                 ) : (
-                                    <p className="text-xs text-muted-foreground whitespace-nowrap">
-                                        {session.lastMessageAt ? formatDistanceToNow(session.lastMessageAt.toDate(), { addSuffix: true }) : ''}
-                                    </p>
+                                    session.lastMessageAt && (
+                                        <p className="text-xs text-muted-foreground whitespace-nowrap">
+                                            {formatDistanceToNow(session.lastMessageAt.toDate(), { addSuffix: true })}
+                                        </p>
+                                    )
                                 )}
                             </div>
-                            <p className={cn("text-sm truncate text-muted-foreground", !session.isReadByAdmin && "text-foreground")}>
-                                {session.isUserTyping ? <span className="italic">typing...</span> : session.lastMessage}
+                            <p className={cn("text-sm truncate text-muted-foreground", !session.isReadByAdmin && "text-foreground font-medium")}>
+                                {session.isUserTyping ? <span className="italic text-primary">typing...</span> : session.lastMessage}
                             </p>
                         </div>
                     ))}
+                     {sessions.length === 0 && (
+                        <div className="text-center p-8 text-muted-foreground">
+                            <p>No active conversations.</p>
+                        </div>
+                    )}
                 </ScrollArea>
             </div>
 
@@ -170,35 +170,37 @@ export default function AdminChatPage() {
             <div className="w-2/3 flex flex-col">
                 {selectedChat ? (
                     <>
-                        <div className="p-4 border-b">
-                            <h2 className="text-xl font-bold">{selectedChat.userName}</h2>
-                            {selectedChat.email && <p className="text-sm text-muted-foreground">{selectedChat.email}</p>}
+                        <div className="p-4 border-b flex items-center gap-4">
+                            <Avatar><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>
+                            <div>
+                                <h2 className="text-lg font-bold">{selectedChat.userName}</h2>
+                                {selectedChat.email && <p className="text-sm text-muted-foreground">{selectedChat.email}</p>}
+                            </div>
                         </div>
-                        <div className="flex-1 p-4 overflow-y-auto bg-card/20">
-                            <div className="space-y-4">
+                        <ScrollArea className="flex-1 bg-background/30">
+                            <div className="p-4 space-y-4">
                                  {messages.map((msg) => (
-                                    <div key={msg.id} className={cn("flex gap-2 items-end", msg.sender === 'admin' ? 'justify-end' : 'justify-start')}>
-                                        {msg.sender === 'user' && <Avatar className="h-8 w-8"><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>}
+                                    <div key={msg.id} className={cn("flex gap-2.5 items-end", msg.sender === 'admin' ? 'justify-end' : 'justify-start')}>
+                                        {msg.sender === 'user' && <Avatar className="h-8 w-8 shadow"><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>}
                                         <div className={cn(
-                                            "max-w-[75%] rounded-lg px-3 py-2 text-sm",
-                                            msg.sender === 'admin' ? 'bg-primary text-primary-foreground' : 'bg-muted'
+                                            "max-w-[75%] rounded-lg px-3 py-2 text-sm shadow-sm",
+                                            msg.sender === 'admin' ? 'bg-primary text-primary-foreground rounded-bl-none' : 'bg-muted rounded-br-none'
                                         )}>
                                             <p>{msg.text}</p>
                                         </div>
-                                        {msg.sender === 'admin' && <Avatar className="h-8 w-8"><AvatarFallback>A</AvatarFallback></Avatar>}
+                                        {msg.sender === 'admin' && <Avatar className="h-8 w-8 shadow"><AvatarFallback><Bot className="h-5 w-5"/></AvatarFallback></Avatar>}
                                     </div>
                                 ))}
                                 {isUserTyping && (
-                                    <div className="flex gap-2 items-end justify-start">
-                                        <Avatar className="h-8 w-8"><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>
-                                        <div className="bg-muted rounded-lg px-3 py-2">
+                                    <div className="flex gap-2.5 items-end justify-start">
+                                        <Avatar className="h-8 w-8 shadow"><AvatarFallback>{selectedChat.userName?.charAt(0).toUpperCase() || 'U'}</AvatarFallback></Avatar>
+                                        <div className="bg-muted rounded-lg px-3 py-2 shadow-sm">
                                             <TypingIndicator />
                                         </div>
                                     </div>
                                 )}
-                                <div ref={messagesEndRef} />
                             </div>
-                        </div>
+                        </ScrollArea>
                         <div className="p-4 border-t bg-background">
                             <form onSubmit={handleSendMessage} className="flex items-center space-x-2">
                                 <Input 
@@ -206,6 +208,7 @@ export default function AdminChatPage() {
                                     onChange={handleInputChange}
                                     placeholder="Type your reply..."
                                     disabled={isLoading}
+                                    autoComplete="off"
                                 />
                                 <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
                                     {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
@@ -214,8 +217,9 @@ export default function AdminChatPage() {
                         </div>
                     </>
                 ) : (
-                    <div className="flex-1 flex items-center justify-center">
-                        <p className="text-muted-foreground">Select a conversation to start chatting</p>
+                    <div className="flex-1 flex flex-col items-center justify-center text-center">
+                        <MessageSquare className="h-16 w-16 text-muted-foreground/30" />
+                        <p className="mt-4 text-muted-foreground">Select a conversation to start chatting</p>
                     </div>
                 )}
             </div>
