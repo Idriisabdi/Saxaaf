@@ -1,5 +1,4 @@
 import { Sparkles, Target, Eye, Diamond } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function AboutPage() {
   const values = [
@@ -51,27 +50,25 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-background py-24 sm:py-32 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="py-24 sm:py-32 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="container mx-auto max-w-4xl px-4">
-          <Card>
-            <CardHeader className="text-center p-6">
-               <CardTitle className="font-headline text-3xl font-bold uppercase flex items-center justify-center gap-4">
-                  <Sparkles className="h-8 w-8 text-primary animate-pulse" />
-                  Our Story
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6 text-lg text-foreground/80 p-6 pt-0">
-              <p>
-                  In the modern digital economy, lasting success is achieved at the intersection of compelling narrative and powerful technology. Saxaaf Network was founded on this core belief. We recognized a critical disconnect in the market: brilliant creative visions were often limited by technical constraints, and powerful technologies lacked the storytelling to make them resonate. We built our network to bridge this gap.
-              </p>
-              <p>
-                  We are a new breed of digital partner, a deliberately assembled team of master storytellers, brand strategists, software engineers, and AI specialists. Our philosophy is that the most impactful brand experiences are born when captivating Media Production and Content Creation are built upon a foundation of powerful, scalable Web & Software Design. By infusing this entire process with insightful AI System Analysis, we move beyond simply completing projects—we architect sustainable competitive advantages for our clients.
-              </p>
-              <p>
-                  Our commitment to our clients transcends the traditional vendor relationship. We operate as a dedicated strategic partner, deeply invested in your growth and equipped to navigate the complexities of the digital frontier with you. Our ultimate purpose is to ensure your vision is not only realized but amplified, creating a measurable and lasting impact in your market and beyond.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="text-center mb-12">
+             <h2 className="font-headline text-3xl font-bold uppercase flex items-center justify-center gap-4">
+                <Sparkles className="h-8 w-8 text-primary animate-pulse" />
+                Our Story
+              </h2>
+          </div>
+          <div className="space-y-6 text-lg text-foreground/80 max-w-3xl mx-auto">
+            <p>
+                In the modern digital economy, lasting success is achieved at the intersection of compelling narrative and powerful technology. Saxaaf Network was founded on this core belief. We recognized a critical disconnect in the market: brilliant creative visions were often limited by technical constraints, and powerful technologies lacked the storytelling to make them resonate. We built our network to bridge this gap.
+            </p>
+            <p>
+                We are a new breed of digital partner, a deliberately assembled team of master storytellers, brand strategists, software engineers, and AI specialists. Our philosophy is that the most impactful brand experiences are born when captivating Media Production and Content Creation are built upon a foundation of powerful, scalable Web & Software Design. By infusing this entire process with insightful AI System Analysis, we move beyond simply completing projects—we architect sustainable competitive advantages for our clients.
+            </p>
+            <p>
+                Our commitment to our clients transcends the traditional vendor relationship. We operate as a dedicated strategic partner, deeply invested in your growth and equipped to navigate the complexities of the digital frontier with you. Our ultimate purpose is to ensure your vision is not only realized but amplified, creating a measurable and lasting impact in your market and beyond.
+            </p>
+          </div>
         </div>
       </div>
     </div>
