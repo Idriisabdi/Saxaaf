@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -13,6 +14,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Send, Loader2, Bot, MessageSquare } from 'lucide-react';
 import { TypingIndicator } from '@/components/typing-indicator';
 import { Badge } from '@/components/ui/badge';
+import { useAuth } from '@/contexts/auth-context';
 
 interface ChatSession {
     id: string;
@@ -38,10 +40,14 @@ export default function AdminChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isUserTyping, setIsUserTyping] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const { user } = useAuth();
 
     useEffect(() => {
+        if (!user) return; // Wait for user to be authenticated
+
         const q = query(collection(db, 'chats'), orderBy('lastMessageAt', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const chatSessions: ChatSession[] = [];
@@ -49,9 +55,13 @@ export default function AdminChatPage() {
                 chatSessions.push({ id: doc.id, ...doc.data() } as ChatSession);
             });
             setSessions(chatSessions);
+            setIsPageLoading(false);
+        }, (error) => {
+            console.error("Error fetching chat sessions:", error);
+            setIsPageLoading(false);
         });
         return () => unsubscribe();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         if (!selectedChat) return;
@@ -92,7 +102,7 @@ export default function AdminChatPage() {
         if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
         updateTypingStatus(selectedChat.id, 'admin', false);
     
-        setIsLoading(true);
+        setIsSubmitting(true);
         const messageText = inputValue;
         setInputValue('');
 
@@ -102,7 +112,7 @@ export default function AdminChatPage() {
             console.error("Failed to send message:", error);
             setInputValue(messageText); // Restore input on failure
         } finally {
-            setIsLoading(false);
+            setIsSubmitting(false);
         }
     };
 
@@ -121,6 +131,14 @@ export default function AdminChatPage() {
             typingTimeoutRef.current = null;
         }, 2000);
     };
+
+    if (isPageLoading) {
+      return (
+        <div className="flex h-[calc(100vh-10rem)] items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      );
+    }
 
     return (
         <div className="flex h-[calc(100vh-8rem)] border rounded-lg bg-card text-card-foreground">
@@ -158,7 +176,7 @@ export default function AdminChatPage() {
                             </p>
                         </div>
                     ))}
-                     {sessions.length === 0 && (
+                     {sessions.length === 0 && !isPageLoading && (
                         <div className="text-center p-8 text-muted-foreground">
                             <p>No active conversations.</p>
                         </div>
@@ -207,11 +225,11 @@ export default function AdminChatPage() {
                                     value={inputValue}
                                     onChange={handleInputChange}
                                     placeholder="Type your reply..."
-                                    disabled={isLoading}
+                                    disabled={isSubmitting}
                                     autoComplete="off"
                                 />
-                                <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
-                                    {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                                <Button type="submit" size="icon" disabled={isSubmitting || !inputValue.trim()}>
+                                    {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                                 </Button>
                             </form>
                         </div>
