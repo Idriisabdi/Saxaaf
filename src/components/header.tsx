@@ -26,9 +26,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center">
-            <Logo className="h-8 w-auto" />
-          </Link>
+          <Logo className="mr-6 h-8 w-auto" />
           <nav className="flex items-center gap-6 text-sm">
             {navLinks.map((link) => (
               <Link
@@ -58,9 +56,10 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-xs pr-0">
-                <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setIsOpen(false)}>
-                  <Logo className="h-8 w-auto" />
-                </Link>
+                <Logo
+                  className="mr-6 mb-8 h-8 w-auto"
+                  onClick={() => setIsOpen(false)}
+                />
                 <div className="flex flex-col space-y-3">
                   {navLinks.map((link) => (
                     <Link
@@ -79,9 +78,9 @@ export default function Header() {
               </SheetContent>
             </Sheet>
           </div>
-          <Link href="/" className="flex items-center md:hidden">
+          <div className="flex items-center md:hidden">
             <Logo className="h-8 w-auto" />
-          </Link>
+          </div>
           <Button asChild>
             <Link href="/lead-assessment">
               Schedule a Consultation

@@ -1,10 +1,15 @@
 'use client';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import type { ComponentProps } from 'react';
 
-export default function Logo({ className }: { className?: string }) {
+type LogoProps = {
+  className?: string;
+} & Omit<ComponentProps<typeof Link>, 'href'>;
+
+export default function Logo({ className, ...props }: LogoProps) {
   return (
-    <Link href="/" className={cn('flex items-center gap-2', className)}>
+    <Link href="/" className={cn('flex items-center gap-2', className)} {...props}>
       <style>
         {`
           @keyframes draw {
