@@ -1,18 +1,18 @@
 'use client';
 
-import { Camera, Computer } from 'lucide-react';
+import { Computer } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes } from 'react';
-
+import CinematicCameraIcon from './CinematicCameraIcon';
 
 const icons = [
-  { Icon: Camera, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 160 },
-  { Icon: Computer, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 175 },
-  { Icon: Camera, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 190 },
-  { Icon: Computer, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 145 },
-  { Icon: Camera, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 130 },
-  { Icon: Computer, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 165 },
+  { Icon: Computer, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '7s' }, size: 175 },
+  { Icon: CinematicCameraIcon, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '8s' }, size: 190 },
+  { Icon: Computer, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '6s' }, size: 160 },
+  { Icon: CinematicCameraIcon, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '9s' }, size: 145 },
+  { Icon: Computer, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '5s' }, size: 130 },
+  { Icon: CinematicCameraIcon, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '10s' }, size: 165 },
 ];
 
 const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
@@ -35,7 +35,8 @@ const AnimatedServiceIcons = ({ className, ...props }: HTMLAttributes<HTMLDivEle
         key={index}
         className="floating-icon"
         style={style as React.CSSProperties}
-        size={size}
+        width={size}
+        height={size}
         strokeWidth={1}
       />
     ))}

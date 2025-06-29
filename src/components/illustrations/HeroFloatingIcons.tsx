@@ -1,17 +1,18 @@
 'use client';
 
-import { Camera, Computer } from 'lucide-react';
+import { Computer } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes } from 'react';
+import CinematicCameraIcon from './CinematicCameraIcon';
 
 
 const icons = [
-  { Icon: Camera, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '10s' }, size: 40 },
+  { Icon: CinematicCameraIcon, style: { top: '15%', left: '10%', animationDelay: '0s', animationDuration: '10s' }, size: 40 },
   { Icon: Computer, style: { top: '20%', left: '80%', animationDelay: '2s', animationDuration: '12s' }, size: 45 },
-  { Icon: Camera, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '9s' }, size: 50 },
+  { Icon: CinematicCameraIcon, style: { top: '70%', left: '5%', animationDelay: '4s', animationDuration: '9s' }, size: 50 },
   { Icon: Computer, style: { top: '80%', left: '90%', animationDelay: '1s', animationDuration: '14s' }, size: 35 },
-  { Icon: Camera, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '8s' }, size: 30 },
+  { Icon: CinematicCameraIcon, style: { top: '50%', left: '50%', animationDelay: '3s', animationDuration: '8s' }, size: 30 },
   { Icon: Computer, style: { top: '5%', left: '40%', animationDelay: '5s', animationDuration: '15s' }, size: 45 },
 ];
 
@@ -36,7 +37,8 @@ const HeroFloatingIcons = ({ className, ...props }: HTMLAttributes<HTMLDivElemen
         key={index}
         className="floating-icon"
         style={style as React.CSSProperties}
-        size={size}
+        width={size}
+        height={size}
         strokeWidth={1}
       />
     ))}
