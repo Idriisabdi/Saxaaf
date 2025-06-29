@@ -8,16 +8,18 @@ type LogoProps = {
   className?: string;
   onClick?: () => void;
   asImage?: boolean;
+  width?: number;
+  height?: number;
 } & Omit<ComponentProps<typeof Link>, 'href' | 'onClick'>;
 
 
-export default function Logo({ className, onClick, asImage = false, ...props }: LogoProps) {
+export default function Logo({ className, onClick, asImage = false, width = 120, height = 40, ...props }: LogoProps) {
   const content = asImage ? (
     <Image
-        src="https://placehold.co/120x40.png"
+        src={`https://placehold.co/${width}x${height}.png`}
         alt="Saxaaf Network Logo"
-        width={120}
-        height={40}
+        width={width}
+        height={height}
         priority
         data-ai-hint="logo"
       />
