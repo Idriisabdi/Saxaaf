@@ -8,9 +8,9 @@ import ChatWidget from '@/components/chat-widget';
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdminPage = pathname.startsWith('/admin');
+    const isLoginPage = pathname === '/login';
 
-    if (isAdminPage) {
-        // AdminLayout provides its own <main> via SidebarInset
+    if (isAdminPage || isLoginPage) {
         return <>{children}</>;
     }
 

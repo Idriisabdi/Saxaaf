@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -21,8 +21,12 @@ import {
   Settings,
   ArrowLeft,
   MessageSquare,
+  LogOut,
+  Loader2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/auth-context';
+import { useEffect } from 'react';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -38,6 +42,26 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, loading, signOut } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login');
+    }
+  }, [user, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <SidebarProvider>
@@ -74,6 +98,10 @@ export default function AdminLayout({
                 <ArrowLeft />
                 <span>Back to Site</span>
               </Link>
+           </Button>
+           <Button onClick={signOut} variant="ghost" className="text-destructive hover:bg-destructive/10 hover:text-destructive">
+             <LogOut />
+             <span>Sign Out</span>
            </Button>
         </SidebarFooter>
       </Sidebar>

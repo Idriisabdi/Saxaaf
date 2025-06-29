@@ -42,9 +42,6 @@ export default function Footer() {
         </div>
         <div className="mt-4 flex flex-col items-center gap-4 border-t border-primary-foreground/20 pt-4 text-sm text-primary-foreground/60 sm:flex-row sm:justify-between">
           <p>&copy; {year} Saxaaf Network. All rights reserved.</p>
-          <Link href="/admin" className="transition-colors hover:text-primary-foreground">
-            Admin Panel
-          </Link>
         </div>
       </div>
     </footer>

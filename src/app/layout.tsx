@@ -3,6 +3,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import LayoutWrapper from '@/components/layout/layout-wrapper';
+import { AuthProvider } from '@/contexts/auth-context';
 
 export const metadata: Metadata = {
   title: 'Saxaaf Network Digital Hub',
@@ -22,8 +23,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className={cn('min-h-screen font-body antialiased flex flex-col')}>
-        <LayoutWrapper>{children}</LayoutWrapper>
-        <Toaster />
+        <AuthProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
