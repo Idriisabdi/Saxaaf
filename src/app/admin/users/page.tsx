@@ -16,7 +16,6 @@ const users = [
     id: '1',
     name: 'Admin User',
     email: 'admin@example.com',
-    role: 'Administrator',
     createdAt: '2023-01-15T10:00:00Z',
     lastSignIn: '2023-10-26T12:30:00Z',
   },
@@ -24,7 +23,6 @@ const users = [
     id: '2',
     name: 'Jane Doe',
     email: 'jane.doe@example.com',
-    role: 'Editor',
     createdAt: '2023-02-20T14:45:00Z',
     lastSignIn: '2023-10-25T09:15:00Z',
   },
@@ -32,7 +30,6 @@ const users = [
     id: '3',
     name: 'John Smith',
     email: 'john.smith@example.com',
-    role: 'Viewer',
     createdAt: '2023-03-10T08:00:00Z',
     lastSignIn: '2023-10-20T18:00:00Z',
   },
@@ -61,7 +58,6 @@ export default function UsersPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>User</TableHead>
-                <TableHead>Role</TableHead>
                 <TableHead>Created At</TableHead>
                 <TableHead className="text-right">Last Sign-In</TableHead>
               </TableRow>
@@ -73,7 +69,6 @@ export default function UsersPage() {
                     <div className="font-medium">{user.name}</div>
                     <div className="text-sm text-muted-foreground">{user.email}</div>
                   </TableCell>
-                  <TableCell>{user.role}</TableCell>
                   <TableCell>{new Date(user.createdAt).toLocaleDateString()}</TableCell>
                   <TableCell className="text-right">{new Date(user.lastSignIn).toLocaleString()}</TableCell>
                 </TableRow>

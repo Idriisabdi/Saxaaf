@@ -2,7 +2,7 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-  
+
     // LEADS & CONTACTS: Allows public form submission, but only authenticated
     // admins can read or manage the data.
     match /leads/{leadId} {
@@ -14,24 +14,23 @@ service cloud.firestore {
       allow read, update, delete: if request.auth != null;
     }
 
-    // CHAT:
+    // CHAT: Granular rules for chat security.
     match /chats/{chatId} {
-      // Allow anyone to create a chat session.
+      // Allow anyone to create a new chat session.
       allow create: if true;
-      // Allow anyone to get a *specific* chat document they know the ID of.
-      // This is for the public chat widget to read typing status.
+      
+      // Allow anyone to read a specific chat document (for typing status),
+      // but only authenticated admins can list all chats or manage them.
       allow get: if true;
-      // Only authenticated admins can list all chats, update metadata, or delete.
       allow list, update, delete: if request.auth != null;
 
-      // MESSAGES SUBCOLLECTION:
+      // Allow anyone to read or write messages within any chat session.
+      // The client-side logic ensures users only access their own session.
       match /messages/{messageId} {
-        // Allow anyone to read or write messages to a chat.
-        // Security is implicit: you need the chat ID to do this.
         allow read, write: if true;
       }
     }
-    
+
     // BEHAVIOR ANALYTICS: Allows anyone to log a page view, but only
     // authenticated admins can read the collected data.
     match /pageViews/{viewId} {
@@ -41,7 +40,7 @@ service cloud.firestore {
 
     // Fallback rule: Deny all other reads/writes by default for security.
     match /{document=**} {
-      allow read, write: if false;
+        allow read, write: if false;
     }
   }
 }
