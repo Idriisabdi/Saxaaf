@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-hidden">
-      <div className="container mx-auto px-4 py-8 sm:py-12 animate-in fade-in duration-500">
+      <div className="container mx-auto px-4 py-0.5 animate-in fade-in duration-500">
         <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="animate-in fade-in slide-in-from-left-8 duration-700">
-                <CompanyOverviewAnimation className="w-full h-auto max-w-lg mx-auto" />
+                <CompanyOverviewAnimation className="w-full h-auto max-w-md mx-auto" />
             </div>
             <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-700">
                 <h2 className="font-headline text-3xl font-bold uppercase text-primary">
