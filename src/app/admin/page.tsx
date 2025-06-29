@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -14,7 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { DollarSign, Users, LineChart, AlertTriangle } from 'lucide-react';
+import { DollarSign, Users, LineChart, AlertTriangle, Loader2 } from 'lucide-react';
 import { getLeads, type Lead } from '@/services/lead-service';
 import { format } from 'date-fns';
 
@@ -31,8 +34,23 @@ function getPriorityBadge(priority: 'high' | 'medium' | 'low') {
   }
 }
 
-export default async function AdminDashboardPage() {
-  const recentLeads = await getLeads();
+export default function AdminDashboardPage() {
+  const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchLeads() {
+      try {
+        const leads = await getLeads();
+        setRecentLeads(leads);
+      } catch (error) {
+        console.error("Failed to fetch leads:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchLeads();
+  }, []);
 
   const totalLeads = recentLeads.length;
   const highPriorityLeads = recentLeads.filter(
@@ -49,6 +67,14 @@ export default async function AdminDashboardPage() {
     { title: 'Conversion Rate', value: '12.5%', icon: LineChart },
     { title: 'Total Revenue', value: '$125,432', icon: DollarSign },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[calc(100vh-10rem)] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
