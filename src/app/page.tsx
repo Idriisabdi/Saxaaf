@@ -9,7 +9,7 @@ export default function Home() {
       <div className="container mx-auto">
         <div className="grid min-h-[calc(100vh-3.5rem)] items-center gap-8 px-4 py-16 md:grid-cols-2 md:py-24">
           <div className="space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline">
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl font-headline">
               WHERE CREATIVE VISION MEETS{' '}
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[size:200%_200%] animate-animated-gradient">
                 INTELLIGENT TECHNOLOGY
