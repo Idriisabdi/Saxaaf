@@ -2,51 +2,11 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // LEADS: Allow anyone to create a lead, but only authenticated
-    // admins can view or manage them.
-    match /leads/{leadId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-
-    // CONTACTS: Allow anyone to create a contact entry, but only
-    // authenticated admins can view or manage them.
-    match /contacts/{contactId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-
-    // BEHAVIOR ANALYTICS: Allow anyone to log a page view, but only
-    // authenticated admins can read the collected data.
-    match /pageViews/{viewId} {
-      allow create: if true;
-      allow read: if request.auth != null;
-    }
-
-    // CHAT: The following rules are designed to allow the public-facing
-    // chat widget to function correctly alongside the admin panel.
-    match /chats/{chatId} {
-      // Anyone can create a new chat session document.
-      allow create: if true;
-
-      // Anyone can read a chat document. This is required for the client-side
-      // widget to listen for the admin's typing status. Admins also use this
-      // to read the list of all conversations.
-      allow read: if true;
-
-      // Anyone can update a chat document. This is required for both the
-      // client and admin to update their typing status and for the system
-      // to update the last message details.
-      allow update: if true;
-
-      // Rule for the messages subcollection within a chat.
-      match /messages/{messageId} {
-        // Anyone can create (send) a message.
-        allow create: if true;
-        // Anyone can read messages within a chat.
-        allow read: if true;
-      }
+    // WARNING: These rules are for debugging only and grant open access 
+    // to your entire database. This is not secure for a production environment.
+    // This allows all read and write operations from any user.
+    match /{document=**} {
+      allow read, write: if true;
     }
   }
 }
