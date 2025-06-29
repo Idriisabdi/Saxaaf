@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SERVICES } from "@/lib/constants";
-import { CheckCircle, Lightbulb, Users, Zap } from "lucide-react";
+import { Lightbulb, Users, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import HeroAnimation from "@/components/illustrations/hero-animation";
 
 export default function Home() {
   return (
@@ -27,15 +28,8 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className="relative animate-fade-in">
-              <Image
-                src="https://placehold.co/600x400.png"
-                width={600}
-                height={400}
-                alt="Business meeting"
-                className="rounded-lg shadow-2xl"
-                data-ai-hint="business meeting"
-              />
+            <div className="relative animate-fade-in h-80 md:h-auto md:min-h-[400px]">
+              <HeroAnimation />
             </div>
           </div>
         </div>
