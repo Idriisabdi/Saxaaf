@@ -2,8 +2,15 @@
 
 import Link from 'next/link';
 import { Twitter, Linkedin, Facebook } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Footer() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-gradient-to-r from-primary via-secondary to-primary bg-[size:200%_200%] text-primary-foreground animate-animated-gradient">
       <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
@@ -35,7 +42,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-4 flex flex-col items-center gap-4 border-t border-primary-foreground/20 pt-4 text-sm text-primary-foreground/60 sm:flex-row sm:justify-between">
-          <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Saxaaf Network. All rights reserved.</p>
+          <p>&copy; {year} Saxaaf Network. All rights reserved.</p>
           <Link href="/admin" className="transition-colors hover:text-primary-foreground">
             Admin Panel
           </Link>
