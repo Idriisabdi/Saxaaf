@@ -8,56 +8,26 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 96%; /* Neutral Gray */
-    --foreground: 40 3% 15%; /* Deep Charcoal */
-    --card: 0 0% 96%;
-    --card-foreground: 40 3% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 40 3% 15%;
-    --primary: 43 98% 53%; /* Accent Gold */
-    --primary-foreground: 40 3% 15%;
-    --secondary: 1 60% 40%; /* Saxaaf Red */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 40 3% 46%;
-    --accent: 43 98% 53%; /* Accent Gold */
-    --accent-foreground: 40 3% 15%;
-    --destructive: 1 60% 40%; /* Saxaaf Red */
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 43 98% 53%; /* Accent Gold */
-    --radius: 0.75rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 40 3% 15%;
-    --sidebar-primary: 43 98% 53%;
-    --sidebar-primary-foreground: 40 3% 15%;
-    --sidebar-accent: 0 0% 92%;
-    --sidebar-accent-foreground: 40 3% 15%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 43 98% 53%;
-  }
-
-  .dark {
-    --background: 40 3% 15%; /* Deep Charcoal */
-    --foreground: 0 0% 96%; /* Neutral Gray */
+    --background: 40 3% 15%; /* Deep Charcoal (#292826) */
+    --foreground: 0 0% 96%; /* Neutral Gray (#F5F5F5) */
     --card: 40 3% 15%;
     --card-foreground: 0 0% 96%;
     --popover: 40 3% 15%;
     --popover-foreground: 0 0% 96%;
-    --primary: 43 98% 53%; /* Accent Gold */
+    --primary: 43 98% 53%; /* Accent Gold (#FDB813) */
     --primary-foreground: 40 3% 15%;
-    --secondary: 1 60% 40%; /* Saxaaf Red */
+    --secondary: 1 60% 40%; /* Saxaaf Red (#A42A28) */
     --secondary-foreground: 0 0% 98%;
     --muted: 40 3% 22%;
     --muted-foreground: 0 0% 65%;
-    --accent: 43 98% 53%; /* Accent Gold */
+    --accent: 43 98% 53%; /* Accent Gold (#FDB813) */
     --accent-foreground: 40 3% 15%;
     --destructive: 1 60% 50%; /* Brighter Saxaaf Red for dark mode */
     --destructive-foreground: 0 0% 98%;
     --border: 40 3% 22%;
     --input: 40 3% 22%;
-    --ring: 43 98% 53%; /* Accent Gold */
+    --ring: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --radius: 0.75rem;
     --sidebar-background: 40 3% 15%;
     --sidebar-foreground: 0 0% 96%;
     --sidebar-primary: 43 98% 53%;
@@ -65,6 +35,36 @@ body {
     --sidebar-accent: 40 3% 22%;
     --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 40 3% 22%;
+    --sidebar-ring: 43 98% 53%;
+  }
+
+  .dark {
+    --background: 0 0% 96%; /* Neutral Gray (#F5F5F5) */
+    --foreground: 40 3% 15%; /* Deep Charcoal (#292826) */
+    --card: 0 0% 96%;
+    --card-foreground: 40 3% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 40 3% 15%;
+    --primary: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --primary-foreground: 40 3% 15%;
+    --secondary: 1 60% 40%; /* Saxaaf Red (#A42A28) */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 40 3% 46%;
+    --accent: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --accent-foreground: 40 3% 15%;
+    --destructive: 1 60% 40%; /* Saxaaf Red (#A42A28) */
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 40 3% 15%;
+    --sidebar-primary: 43 98% 53%;
+    --sidebar-primary-foreground: 40 3% 15%;
+    --sidebar-accent: 0 0% 92%;
+    --sidebar-accent-foreground: 40 3% 15%;
+    --sidebar-border: 0 0% 90%;
     --sidebar-ring: 43 98% 53%;
   }
 }
