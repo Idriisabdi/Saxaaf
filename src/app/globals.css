@@ -8,64 +8,86 @@ body {
 
 @layer base {
   :root {
-    --background: 40 3% 15%; /* Deep Charcoal (#292826) */
-    --foreground: 0 0% 96%; /* Neutral Gray (#F5F5F5) */
-    --card: 40 3% 15%;
-    --card-foreground: 0 0% 96%;
-    --popover: 40 3% 15%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 43 98% 53%; /* Accent Gold (#FDB813) */
-    --primary-foreground: 40 3% 15%;
-    --secondary: 1 60% 40%; /* Saxaaf Red (#A42A28) */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 40 3% 22%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 43 98% 53%; /* Accent Gold (#FDB813) */
-    --accent-foreground: 40 3% 15%;
-    --destructive: 1 60% 50%; /* Brighter Saxaaf Red for dark mode */
-    --destructive-foreground: 0 0% 98%;
-    --border: 40 3% 22%;
-    --input: 40 3% 22%;
-    --ring: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --background: 222 83% 4%; /* Dark Navy */
+    --foreground: 210 20% 98%; /* Almost White */
+
+    --card: 222 47% 11%; /* Dark Slate Blue */
+    --card-foreground: 210 20% 98%;
+
+    --popover: 222 83% 4%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 43 98% 53%; /* Accent Gold - unchanged */
+    --primary-foreground: 222 47% 11%; /* Dark Slate Blue */
+
+    --secondary: 1 70% 55%; /* Brighter Saxaaf Red */
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 222 47% 11%;
+    --muted-foreground: 210 20% 75%; /* Lighter muted text */
+
+    --accent: 222 47% 11%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 1 60% 50%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 222 47% 16%; /* Slightly lighter border */
+    --input: 222 47% 16%;
+    --ring: 43 98% 53%;
+
     --radius: 0.75rem;
-    --sidebar-background: 40 3% 15%;
-    --sidebar-foreground: 0 0% 96%;
+
+    /* Sidebar variables for Admin UI */
+    --sidebar-background: 222 83% 4%;
+    --sidebar-foreground: 210 20% 98%;
     --sidebar-primary: 43 98% 53%;
-    --sidebar-primary-foreground: 40 3% 15%;
-    --sidebar-accent: 40 3% 22%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 40 3% 22%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 222 47% 11%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 222 47% 16%;
     --sidebar-ring: 43 98% 53%;
   }
 
   .dark {
-    --background: 0 0% 96%; /* Neutral Gray (#F5F5F5) */
-    --foreground: 40 3% 15%; /* Deep Charcoal (#292826) */
-    --card: 0 0% 96%;
-    --card-foreground: 40 3% 15%;
+    /* The user is on a dark theme by default, so I will configure the light theme here. */
+    --background: 0 0% 100%; /* White */
+    --foreground: 222 83% 4%; /* Dark Navy Text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 83% 4%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 40 3% 15%;
-    --primary: 43 98% 53%; /* Accent Gold (#FDB813) */
-    --primary-foreground: 40 3% 15%;
-    --secondary: 1 60% 40%; /* Saxaaf Red (#A42A28) */
+    --popover-foreground: 222 83% 4%;
+
+    --primary: 43 90% 55%; /* Slightly brighter gold for light theme */
+    --primary-foreground: 222 83% 4%;
+
+    --secondary: 1 60% 50%; /* Saxaaf Red */
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 40 3% 46%;
-    --accent: 43 98% 53%; /* Accent Gold (#FDB813) */
-    --accent-foreground: 40 3% 15%;
-    --destructive: 1 60% 40%; /* Saxaaf Red (#A42A28) */
+
+    --muted: 0 0% 96.1%; /* Light Gray */
+    --muted-foreground: 222 47% 44%; /* Muted Navy Text */
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 222 83% 4%;
+
+    --destructive: 1 60% 50%;
     --destructive-foreground: 0 0% 98%;
+
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 43 98% 53%; /* Accent Gold (#FDB813) */
+    --ring: 43 90% 55%;
+
+    /* Sidebar variables for Admin UI */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 40 3% 15%;
-    --sidebar-primary: 43 98% 53%;
-    --sidebar-primary-foreground: 40 3% 15%;
+    --sidebar-foreground: 222 83% 4%;
+    --sidebar-primary: 43 90% 55%;
+    --sidebar-primary-foreground: 222 83% 4%;
     --sidebar-accent: 0 0% 92%;
-    --sidebar-accent-foreground: 40 3% 15%;
+    --sidebar-accent-foreground: 222 83% 4%;
     --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 43 98% 53%;
+    --sidebar-ring: 43 90% 55%;
   }
 }
 

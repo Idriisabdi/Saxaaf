@@ -51,7 +51,7 @@ export default function MarketResearchPage() {
             <Sparkles className="h-10 w-10 text-primary animate-pulse" />
             Opportunity Analysis
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-xl font-medium text-foreground/80">
+          <p className="mx-auto mt-6 max-w-3xl text-xl font-medium text-muted-foreground">
             Unveiling the Somali Digital Revolution: A Strategic Market Guide
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function MarketResearchPage() {
               </p>
             </div>
           </div>
-          <div className="space-y-6 pt-4 text-lg text-foreground/80">
+          <div className="space-y-6 pt-4 text-lg text-muted-foreground">
             <p>
               Somalia stands at a pivotal moment in its history, a digital
               tipping point where the narrative is no longer defined by past
@@ -91,19 +91,19 @@ export default function MarketResearchPage() {
                <Sparkles className="h-8 w-8 text-primary animate-pulse" />
               Strategic Market Analysis
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/60">
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               The data-backed realities of Somalia's digital ecosystem and economic landscape.
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '200ms' }}>
               <CardHeader>
                 <CardTitle className="flex items-start gap-4 uppercase">
                   <Signal className="mt-1 h-6 w-6 flex-shrink-0 text-primary animate-pulse" />
                   <span>The Connectivity Explosion</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow space-y-4 text-foreground/80">
+              <CardContent className="flex-grow space-y-4 text-muted-foreground">
                 <p>
                   With internet penetration soaring from 9.8% in 2023 to 55.2% in 2025, Somalia has crossed a critical threshold of digital adoption.
                 </p>
@@ -112,14 +112,14 @@ export default function MarketResearchPage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '400ms' }}>
               <CardHeader>
                 <CardTitle className="flex items-start gap-4 uppercase">
                   <Users className="mt-1 h-6 w-6 flex-shrink-0 text-primary animate-pulse" />
                   <span>The Somali Digital Consumer</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow space-y-4 text-foreground/80">
+              <CardContent className="flex-grow space-y-4 text-muted-foreground">
                 <p>
                   A youthful, tech-savvy population drives digital adoption, with social media (led by Facebook and TikTok) as their primary channel for news and engagement.
                 </p>
@@ -128,14 +128,14 @@ export default function MarketResearchPage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '600ms' }}>
               <CardHeader>
                 <CardTitle className="flex items-start gap-4 uppercase">
                   <CreditCard className="mt-1 h-6 w-6 flex-shrink-0 text-primary animate-pulse" />
                   <span>The E-commerce Frontier</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow space-y-4 text-foreground/80">
+              <CardContent className="flex-grow space-y-4 text-muted-foreground">
                 <p>
                   High demand for e-commerce is held back by a "trust deficit." The first to build a truly trustworthy, professional digital platform will define and capture the market.
                 </p>
@@ -184,7 +184,7 @@ export default function MarketResearchPage() {
                 <span>A New Economic Dawn: From Aid to Investment</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-lg text-foreground/80">
+            <CardContent className="space-y-4 text-lg text-muted-foreground">
               <p>
                 Historic debt relief has created a "launchpad" for a new era of economic development driven by self-reliance and private capital. The engine of this new economy is the country's resilient private sector, primarily composed of Micro, Small, and Medium Enterprises (MSMEs).
               </p>
@@ -201,41 +201,41 @@ export default function MarketResearchPage() {
               <Sparkles className="h-8 w-8 text-primary animate-pulse" />
               The Imperative for Digital Transformation
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/60">
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               Why a strategic digital presence is indispensable for every organization.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '200ms' }}>
               <CardHeader className="items-center text-center">
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <Building className="h-8 w-8 animate-pulse" />
                   </div>
                   <CardTitle className="uppercase">For Businesses</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-center text-foreground/80">
+              <CardContent className="flex-grow text-center text-muted-foreground">
                 <p>The 10.7 million Somalis online represent a vast, untapped market. A professional digital footprint is essential for reaching consumers, building a brand, driving sales, and attracting investment.</p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '400ms' }}>
               <CardHeader className="items-center text-center">
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <Handshake className="h-8 w-8 animate-pulse" />
                   </div>
                   <CardTitle className="uppercase">For NGOs</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-center text-foreground/80">
+              <CardContent className="flex-grow text-center text-muted-foreground">
                 <p>Digital platforms are a force multiplier for mission delivery, amplifying impact, improving operational efficiency, and enhancing transparency for donors and stakeholders.</p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '600ms' }}>
               <CardHeader className="items-center text-center">
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <Landmark className="h-8 w-8 animate-pulse" />
                   </div>
                   <CardTitle className="uppercase">For Government</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-center text-foreground/80">
+              <CardContent className="flex-grow text-center text-muted-foreground">
                 <p>With ICT as a national priority, a user-friendly digital presence is fundamental to modernizing public services, enhancing transparency, and rebuilding the social contract with a connected citizenry.</p>
               </CardContent>
             </Card>
@@ -247,7 +247,7 @@ export default function MarketResearchPage() {
             <h2 className="font-headline mt-6 text-3xl font-bold uppercase">
               Your Partner in the Digital Frontier
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg text-foreground/80">
+            <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
               Understanding the scale of Somalia's digital transformation is the first step. The second is taking decisive action. We bridge the gap between analysis and execution, offering world-class digital services to engineer the tools your organization needs to lead in this new era.
             </p>
         </section>
@@ -257,7 +257,7 @@ export default function MarketResearchPage() {
               <Sparkles className="h-8 w-8 text-primary animate-pulse" />
               Seize Your Digital Advantage
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg text-foreground/80">
+            <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
               The digital transformation of Somalia is not a future event; it
               is happening now, and its pace is accelerating. The
               organizations that act decisively today will define the

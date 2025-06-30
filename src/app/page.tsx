@@ -16,13 +16,13 @@ export default function Home() {
             <HeroAnimation className="h-auto w-full max-w-lg" />
           </div>
           <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-700 md:order-2">
-            <h1 className="text-3xl font-extrabold tracking-tight font-headline">
+            <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight font-headline">
               WHERE CREATIVE VISION MEETS{' '}
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[size:200%_200%] animate-animated-gradient">
                 INTELLIGENT TECHNOLOGY
               </span>
             </h1>
-            <p className="max-w-2xl text-xl text-muted-foreground">
+            <p className="max-w-2xl text-lg text-muted-foreground">
               We craft compelling narratives through world-class Media Production, build powerful digital platforms with expert Web & Software Design, and deploy transformative AI Systems to drive measurable growth and connect our clients with a global audience.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -43,14 +43,14 @@ export default function Home() {
       {/* Integrated Services Section */}
       <section className="py-16 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <h2 className="font-headline text-3xl font-bold uppercase tracking-tight">Our Integrated Services</h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
               We offer a comprehensive suite of services designed to work in synergy, providing our clients with a unified and powerful digital solution.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '200ms' }}>
               <CardHeader>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Film className="h-6 w-6" />
@@ -63,7 +63,7 @@ export default function Home() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '400ms' }}>
               <CardHeader>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Code className="h-6 w-6" />
@@ -76,7 +76,7 @@ export default function Home() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+            <Card className="flex flex-col animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '600ms' }}>
               <CardHeader>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <BrainCircuit className="h-6 w-6" />
@@ -96,15 +96,15 @@ export default function Home() {
       {/* Target Audience Section */}
       <section className="bg-card/50 py-16 sm:py-24 border-y">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <h2 className="font-headline text-3xl font-bold uppercase tracking-tight">Target Audience & Market Focus</h2>
+          <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <h2 className="font-headline text-3xl font-bold uppercase tracking-tight">Who We Serve</h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
               Our services are designed for ambitious businesses ready to lead in the digital age. We primarily serve two client profiles:
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <Card className="animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+            <Card className="animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '200ms' }}>
               <CardHeader>
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
@@ -122,7 +122,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+            <Card className="animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '400ms' }}>
               <CardHeader>
                 <div className="flex items-start gap-4">
                    <div className="flex-shrink-0">

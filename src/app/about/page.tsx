@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-hidden">
-      <div className="container mx-auto px-4 py-0.5 pb-24 animate-in fade-in duration-500">
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+      <div className="container mx-auto px-4 py-16 pb-24 animate-in fade-in duration-500">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-in fade-in slide-in-from-left-8 duration-700">
                 <CompanyOverviewAnimation className="w-full h-auto max-w-md mx-auto" />
             </div>
@@ -14,7 +14,7 @@ export default function AboutPage() {
                 <h2 className="font-headline text-3xl font-bold uppercase text-primary">
                     Company Overview
                 </h2>
-                <div className="space-y-4 text-lg text-foreground/80">
+                <div className="space-y-4 text-lg text-muted-foreground">
                     <p>
                         Saxaaf Network is a premier integrated digital agency positioned at the intersection of creative storytelling and intelligent technology. Founded on the principle that modern success requires a seamless fusion of both art and engineering, we provide a comprehensive suite of services designed to build brands, captivate audiences, and drive measurable growth.
                     </p>
@@ -35,42 +35,42 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '200ms' }}>
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '200ms' }}>
               <CardHeader className="items-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Target className="h-8 w-8 animate-pulse" />
                 </div>
                 <CardTitle className="font-headline uppercase mt-4">Our Mission</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-foreground/80">
+              <CardContent className="flex-grow text-muted-foreground">
                 <p>
                   To empower businesses by fusing creative storytelling with intelligent technology, delivering digital solutions that drive measurable growth and build lasting connections.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '400ms' }}>
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '400ms' }}>
               <CardHeader className="items-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Eye className="h-8 w-8 animate-pulse" />
                 </div>
                 <CardTitle className="font-headline uppercase mt-4">Our Vision</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-foreground/80">
+              <CardContent className="flex-grow text-muted-foreground">
                 <p>
                   To be the leading digital partner in transforming how organizations engage with their audiences in the digital frontier, setting new standards for innovation and impact.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500" style={{ animationDelay: '600ms' }}>
+            <Card className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2" style={{ animationDelay: '600ms' }}>
               <CardHeader className="items-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Gem className="h-8 w-8 animate-pulse" />
                 </div>
                 <CardTitle className="font-headline uppercase mt-4">Our Values</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow text-foreground/80">
+              <CardContent className="flex-grow text-muted-foreground">
                 <ul className="space-y-2 text-left">
                   <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Innovation:</strong> Relentlessly pursuing new ideas.</span></li>
                   <li className="flex items-start"><Gem className="w-4 h-4 mt-1 mr-2 text-primary/80 flex-shrink-0" /><span><strong>Partnership:</strong> Succeeding when our clients succeed.</span></li>
@@ -81,7 +81,7 @@ export default function AboutPage() {
             </Card>
           </div>
 
-          <div className="mt-24 max-w-4xl mx-auto text-lg text-foreground/80 space-y-6 text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="mt-24 max-w-4xl mx-auto text-lg text-muted-foreground space-y-6 text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
             <p>
                 We believe that the most compelling brand experiences are created when captivating Media Production and Content Creation are built upon a foundation of powerful, scalable Web & Software Design. By infusing this entire process with insightful AI System Analysis, we move beyond simply completing projects—we architect sustainable competitive advantages for our clients.
             </p>

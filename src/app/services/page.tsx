@@ -104,7 +104,7 @@ export default function ServicesPage() {
                         <Sparkles className="h-10 w-10 text-primary animate-pulse" />
                         Our Services
                     </h1>
-                    <p className="max-w-2xl text-xl text-foreground">
+                    <p className="max-w-2xl text-lg text-foreground/90">
                         A complete suite of digital services designed to work together to build your digital future. We combine strategy, design, and technology to deliver impactful results.
                     </p>
                     <div className="flex flex-col gap-4 sm:flex-row">
@@ -131,7 +131,7 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <Card
               key={service.title}
-              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500"
+              className="flex flex-col text-center animate-in fade-in zoom-in-95 duration-500 transition-all hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2"
               style={{ animationDelay: `${(index + 1) * 150}ms` }}
             >
               <CardHeader>
@@ -141,7 +141,7 @@ export default function ServicesPage() {
               </CardHeader>
               <CardContent className="flex flex-1 flex-col">
                 <CardTitle className="mb-3 font-bold uppercase">{service.title}</CardTitle>
-                <CardDescription className="mb-6 flex-grow">
+                <CardDescription className="mb-6 flex-grow text-muted-foreground">
                   {service.description}
                 </CardDescription>
 
@@ -151,7 +151,7 @@ export default function ServicesPage() {
                   {service.details.map((detail) => (
                     <li key={detail} className="flex items-start gap-3">
                       <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                      <span className="text-foreground/80">{detail}</span>
+                      <span className="text-muted-foreground">{detail}</span>
                     </li>
                   ))}
                 </ul>
