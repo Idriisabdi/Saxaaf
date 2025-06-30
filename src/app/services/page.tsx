@@ -27,7 +27,7 @@ const services = [
       'From brand films and promotional videos to podcast production and SEO-optimized content, we create media that captivates and converts.',
     details: [
       'Video Production',
-      'Podcast Production & Strategy',
+      'Media Campaign Awareness',
       'Branding & Visual Identity',
       'Content Marketing & SEO',
     ],
