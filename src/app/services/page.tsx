@@ -104,7 +104,7 @@ export default function ServicesPage() {
                         <Sparkles className="h-10 w-10 text-primary animate-pulse" />
                         Our Services
                     </h1>
-                    <p className="max-w-2xl text-xl text-foreground/80">
+                    <p className="max-w-2xl text-xl text-foreground">
                         A complete suite of digital services designed to work together to build your digital future. We combine strategy, design, and technology to deliver impactful results.
                     </p>
                     <div className="flex flex-col gap-4 sm:flex-row">
