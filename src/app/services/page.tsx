@@ -14,7 +14,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import ProcessIllustration from '@/components/illustrations/process-illustration';
-import AnimatedServiceIcons from '@/components/illustrations/AnimatedServiceIcons';
+import ServiceHeroAnimation from '@/components/illustrations/ServiceHeroAnimation';
 import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
 import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
 import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
@@ -98,9 +98,11 @@ export default function ServicesPage() {
     <div className="bg-background overflow-hidden relative">
       <BokehBackground />
       {/* Services Section */}
-      <div className="relative container mx-auto px-4 py-16 sm:py-24 animate-in fade-in duration-500 overflow-hidden">
-        <AnimatedServiceIcons />
-        <div className="text-center animate-in fade-in zoom-in-95 duration-500">
+      <div className="relative container mx-auto px-4 py-16 sm:py-24 animate-in fade-in duration-500">
+        <div className="absolute inset-x-0 top-0 -z-10 h-[400px] sm:h-[500px] flex justify-center items-center opacity-70">
+            <ServiceHeroAnimation className="w-full h-auto max-w-5xl" />
+        </div>
+        <div className="text-center animate-in fade-in zoom-in-95 duration-500 pt-24 sm:pt-32">
           <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl uppercase flex items-center justify-center gap-4">
             <Sparkles className="h-10 w-10 text-primary animate-pulse" />
             Our Services
