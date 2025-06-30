@@ -18,7 +18,6 @@ import ServiceHeroAnimation from '@/components/illustrations/ServiceHeroAnimatio
 import CameraLensIcon from '@/components/illustrations/CameraLensIcon';
 import CodeBracketsIcon from '@/components/illustrations/CodeBracketsIcon';
 import AiEyeIcon from '@/components/illustrations/AiEyeIcon';
-import BokehBackground from '@/components/illustrations/bokeh-background';
 
 const services = [
   {
@@ -95,25 +94,40 @@ const processSteps = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-background overflow-hidden relative">
-      <BokehBackground />
-      {/* Services Section */}
-      <div className="relative container mx-auto px-4 py-16 sm:py-24 animate-in fade-in duration-500">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[400px] sm:h-[500px] flex justify-center items-center opacity-70">
-            <ServiceHeroAnimation className="w-full h-auto max-w-5xl" />
+    <div className="bg-background overflow-hidden">
+       {/* Hero Section */}
+      <div className="w-full bg-card/30 border-b">
+        <div className="container mx-auto">
+            <div className="grid min-h-[70vh] items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-24">
+                <div className="space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
+                    <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl uppercase flex items-center gap-4">
+                        <Sparkles className="h-10 w-10 text-primary animate-pulse" />
+                        Our Services
+                    </h1>
+                    <p className="max-w-2xl text-xl text-foreground/80">
+                        A complete suite of digital services designed to work together to build your digital future. We combine strategy, design, and technology to deliver impactful results.
+                    </p>
+                    <div className="flex flex-col gap-4 sm:flex-row">
+                        <Button asChild size="lg" variant="default">
+                            <Link href="/lead-assessment">
+                                Get Free AI Assessment
+                            </Link>
+                        </Button>
+                        <Button asChild size="lg" variant="outline">
+                            <Link href="/contact">Contact Us</Link>
+                        </Button>
+                    </div>
+                </div>
+                <div className="relative flex items-center justify-center animate-in fade-in zoom-in-95 duration-700 md:order-first">
+                    <ServiceHeroAnimation className="w-full h-auto max-w-lg" />
+                </div>
+            </div>
         </div>
-        <div className="text-center animate-in fade-in zoom-in-95 duration-500 pt-24 sm:pt-32">
-          <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-5xl uppercase flex items-center justify-center gap-4">
-            <Sparkles className="h-10 w-10 text-primary animate-pulse" />
-            Our Services
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/80">
-            A complete suite of digital services designed to work together to
-            build your digital future.
-          </p>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      </div>
+      
+      {/* Services Cards Section */}
+      <div className="container mx-auto px-4 py-16 sm:py-24">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <Card
               key={service.title}
