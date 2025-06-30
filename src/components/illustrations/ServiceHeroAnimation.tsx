@@ -41,11 +41,10 @@ const ServiceHeroAnimation = (props: SVGProps<SVGSVGElement>) => {
             50% { transform: scale(1.1); opacity: 1; }
           }
           @keyframes pulse-node {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 10px hsl(var(--primary)); }
-            50% { transform: scale(1.05); box-shadow: 0 0 20px hsl(var(--primary)); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
           }
-          @keyframes stream-flow {
-            from { stroke-dashoffset: 1000; }
+          @keyframes stream-draw {
             to { stroke-dashoffset: 0; }
           }
           @keyframes icon-appear {
@@ -63,10 +62,10 @@ const ServiceHeroAnimation = (props: SVGProps<SVGSVGElement>) => {
           .stream-path {
             stroke-dasharray: 500;
             stroke-dashoffset: 500;
-            animation: stream-flow 6s ease-out infinite;
+            animation: stream-draw 4s ease-out forwards;
           }
           .icon-node {
-             animation: icon-appear 3s ease-out forwards;
+             animation: icon-appear 2s ease-out forwards;
           }
         `}
       </style>
@@ -101,8 +100,8 @@ const ServiceHeroAnimation = (props: SVGProps<SVGSVGElement>) => {
         
         {/* Stream 2: Web Dev */}
         <g className="icon-node" style={{ animationDelay: '1s' }}>
-          <path d="M400,200 C 400,100 400,100 400,50" fill="none" stroke="url(#stream-gradient)" strokeWidth="2" className="stream-path" style={{animationDelay: '0.5s'}}/>
-          <g transform="translate(400, 50)" className="node-pulse" style={{animationDelay: '0.5s'}}>
+          <path d="M400,200 C 400,100 400,100 400,50" fill="none" stroke="url(#stream-gradient)" strokeWidth="2" className="stream-path" />
+          <g transform="translate(400, 50)" className="node-pulse">
             <circle r="35" fill="hsl(var(--card))" stroke="hsl(var(--primary))" strokeWidth="2" />
              <foreignObject x="-20" y="-20" width="40" height="40">
               <Code className="w-full h-full text-primary" />
@@ -112,8 +111,8 @@ const ServiceHeroAnimation = (props: SVGProps<SVGSVGElement>) => {
         
         {/* Stream 3: AI */}
         <g className="icon-node" style={{ animationDelay: '1.5s' }}>
-          <path d="M400,200 C 550,100 600,150 650,100" fill="none" stroke="url(#stream-gradient)" strokeWidth="2" className="stream-path" style={{animationDelay: '1s'}}/>
-          <g transform="translate(650, 100)" className="node-pulse" style={{animationDelay: '1s'}}>
+          <path d="M400,200 C 550,100 600,150 650,100" fill="none" stroke="url(#stream-gradient)" strokeWidth="2" className="stream-path" />
+          <g transform="translate(650, 100)" className="node-pulse">
             <circle r="35" fill="hsl(var(--card))" stroke="hsl(var(--accent))" strokeWidth="2" />
              <foreignObject x="-20" y="-20" width="40" height="40">
               <BrainCircuit className="w-full h-full text-accent" />
